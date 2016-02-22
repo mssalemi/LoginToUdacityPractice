@@ -1,0 +1,524 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		482D7C861C7AB10A0077BBB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D7C851C7AB10A0077BBB8 /* AppDelegate.swift */; };
+		482D7C881C7AB10A0077BBB8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D7C871C7AB10A0077BBB8 /* LoginViewController.swift */; };
+		482D7C8B1C7AB10A0077BBB8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 482D7C891C7AB10A0077BBB8 /* Main.storyboard */; };
+		482D7C8D1C7AB10A0077BBB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 482D7C8C1C7AB10A0077BBB8 /* Assets.xcassets */; };
+		482D7C901C7AB10A0077BBB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 482D7C8E1C7AB10A0077BBB8 /* LaunchScreen.storyboard */; };
+		482D7C9B1C7AB10A0077BBB8 /* LoginToUdacityPracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D7C9A1C7AB10A0077BBB8 /* LoginToUdacityPracticeTests.swift */; };
+		482D7CA61C7AB10A0077BBB8 /* LoginToUdacityPracticeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D7CA51C7AB10A0077BBB8 /* LoginToUdacityPracticeUITests.swift */; };
+		482D7CB41C7AB2E60077BBB8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D7CB31C7AB2E60077BBB8 /* Constants.swift */; };
+		482D7CB61C7B76CC0077BBB8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D7CB51C7B76CC0077BBB8 /* MapViewController.swift */; };
+		482D7CB81C7B7FAB0077BBB8 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D7CB71C7B7FAB0077BBB8 /* GCDBlackBox.swift */; };
+		482D7CBA1C7BD39E0077BBB8 /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D7CB91C7BD39E0077BBB8 /* LogoutViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		482D7C971C7AB10A0077BBB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 482D7C7A1C7AB10A0077BBB8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 482D7C811C7AB10A0077BBB8;
+			remoteInfo = LoginToUdacityPractice;
+		};
+		482D7CA21C7AB10A0077BBB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 482D7C7A1C7AB10A0077BBB8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 482D7C811C7AB10A0077BBB8;
+			remoteInfo = LoginToUdacityPractice;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		482D7C821C7AB10A0077BBB8 /* LoginToUdacityPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginToUdacityPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		482D7C851C7AB10A0077BBB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		482D7C871C7AB10A0077BBB8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		482D7C8A1C7AB10A0077BBB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		482D7C8C1C7AB10A0077BBB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		482D7C8F1C7AB10A0077BBB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		482D7C911C7AB10A0077BBB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		482D7C961C7AB10A0077BBB8 /* LoginToUdacityPracticeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoginToUdacityPracticeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		482D7C9A1C7AB10A0077BBB8 /* LoginToUdacityPracticeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToUdacityPracticeTests.swift; sourceTree = "<group>"; };
+		482D7C9C1C7AB10A0077BBB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		482D7CA11C7AB10A0077BBB8 /* LoginToUdacityPracticeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoginToUdacityPracticeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		482D7CA51C7AB10A0077BBB8 /* LoginToUdacityPracticeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToUdacityPracticeUITests.swift; sourceTree = "<group>"; };
+		482D7CA71C7AB10A0077BBB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		482D7CB31C7AB2E60077BBB8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		482D7CB51C7B76CC0077BBB8 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		482D7CB71C7B7FAB0077BBB8 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		482D7CB91C7BD39E0077BBB8 /* LogoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		482D7C7F1C7AB10A0077BBB8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		482D7C931C7AB10A0077BBB8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		482D7C9E1C7AB10A0077BBB8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		482D7C791C7AB10A0077BBB8 = {
+			isa = PBXGroup;
+			children = (
+				482D7C841C7AB10A0077BBB8 /* LoginToUdacityPractice */,
+				482D7C991C7AB10A0077BBB8 /* LoginToUdacityPracticeTests */,
+				482D7CA41C7AB10A0077BBB8 /* LoginToUdacityPracticeUITests */,
+				482D7C831C7AB10A0077BBB8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		482D7C831C7AB10A0077BBB8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				482D7C821C7AB10A0077BBB8 /* LoginToUdacityPractice.app */,
+				482D7C961C7AB10A0077BBB8 /* LoginToUdacityPracticeTests.xctest */,
+				482D7CA11C7AB10A0077BBB8 /* LoginToUdacityPracticeUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		482D7C841C7AB10A0077BBB8 /* LoginToUdacityPractice */ = {
+			isa = PBXGroup;
+			children = (
+				482D7C851C7AB10A0077BBB8 /* AppDelegate.swift */,
+				482D7CB71C7B7FAB0077BBB8 /* GCDBlackBox.swift */,
+				482D7C871C7AB10A0077BBB8 /* LoginViewController.swift */,
+				482D7CB91C7BD39E0077BBB8 /* LogoutViewController.swift */,
+				482D7CB51C7B76CC0077BBB8 /* MapViewController.swift */,
+				482D7CB31C7AB2E60077BBB8 /* Constants.swift */,
+				482D7C891C7AB10A0077BBB8 /* Main.storyboard */,
+				482D7C8C1C7AB10A0077BBB8 /* Assets.xcassets */,
+				482D7C8E1C7AB10A0077BBB8 /* LaunchScreen.storyboard */,
+				482D7C911C7AB10A0077BBB8 /* Info.plist */,
+			);
+			path = LoginToUdacityPractice;
+			sourceTree = "<group>";
+		};
+		482D7C991C7AB10A0077BBB8 /* LoginToUdacityPracticeTests */ = {
+			isa = PBXGroup;
+			children = (
+				482D7C9A1C7AB10A0077BBB8 /* LoginToUdacityPracticeTests.swift */,
+				482D7C9C1C7AB10A0077BBB8 /* Info.plist */,
+			);
+			path = LoginToUdacityPracticeTests;
+			sourceTree = "<group>";
+		};
+		482D7CA41C7AB10A0077BBB8 /* LoginToUdacityPracticeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				482D7CA51C7AB10A0077BBB8 /* LoginToUdacityPracticeUITests.swift */,
+				482D7CA71C7AB10A0077BBB8 /* Info.plist */,
+			);
+			path = LoginToUdacityPracticeUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		482D7C811C7AB10A0077BBB8 /* LoginToUdacityPractice */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 482D7CAA1C7AB10A0077BBB8 /* Build configuration list for PBXNativeTarget "LoginToUdacityPractice" */;
+			buildPhases = (
+				482D7C7E1C7AB10A0077BBB8 /* Sources */,
+				482D7C7F1C7AB10A0077BBB8 /* Frameworks */,
+				482D7C801C7AB10A0077BBB8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LoginToUdacityPractice;
+			productName = LoginToUdacityPractice;
+			productReference = 482D7C821C7AB10A0077BBB8 /* LoginToUdacityPractice.app */;
+			productType = "com.apple.product-type.application";
+		};
+		482D7C951C7AB10A0077BBB8 /* LoginToUdacityPracticeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 482D7CAD1C7AB10A0077BBB8 /* Build configuration list for PBXNativeTarget "LoginToUdacityPracticeTests" */;
+			buildPhases = (
+				482D7C921C7AB10A0077BBB8 /* Sources */,
+				482D7C931C7AB10A0077BBB8 /* Frameworks */,
+				482D7C941C7AB10A0077BBB8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				482D7C981C7AB10A0077BBB8 /* PBXTargetDependency */,
+			);
+			name = LoginToUdacityPracticeTests;
+			productName = LoginToUdacityPracticeTests;
+			productReference = 482D7C961C7AB10A0077BBB8 /* LoginToUdacityPracticeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		482D7CA01C7AB10A0077BBB8 /* LoginToUdacityPracticeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 482D7CB01C7AB10A0077BBB8 /* Build configuration list for PBXNativeTarget "LoginToUdacityPracticeUITests" */;
+			buildPhases = (
+				482D7C9D1C7AB10A0077BBB8 /* Sources */,
+				482D7C9E1C7AB10A0077BBB8 /* Frameworks */,
+				482D7C9F1C7AB10A0077BBB8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				482D7CA31C7AB10A0077BBB8 /* PBXTargetDependency */,
+			);
+			name = LoginToUdacityPracticeUITests;
+			productName = LoginToUdacityPracticeUITests;
+			productReference = 482D7CA11C7AB10A0077BBB8 /* LoginToUdacityPracticeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		482D7C7A1C7AB10A0077BBB8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = MxMd;
+				TargetAttributes = {
+					482D7C811C7AB10A0077BBB8 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					482D7C951C7AB10A0077BBB8 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 482D7C811C7AB10A0077BBB8;
+					};
+					482D7CA01C7AB10A0077BBB8 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 482D7C811C7AB10A0077BBB8;
+					};
+				};
+			};
+			buildConfigurationList = 482D7C7D1C7AB10A0077BBB8 /* Build configuration list for PBXProject "LoginToUdacityPractice" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 482D7C791C7AB10A0077BBB8;
+			productRefGroup = 482D7C831C7AB10A0077BBB8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				482D7C811C7AB10A0077BBB8 /* LoginToUdacityPractice */,
+				482D7C951C7AB10A0077BBB8 /* LoginToUdacityPracticeTests */,
+				482D7CA01C7AB10A0077BBB8 /* LoginToUdacityPracticeUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		482D7C801C7AB10A0077BBB8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				482D7C901C7AB10A0077BBB8 /* LaunchScreen.storyboard in Resources */,
+				482D7C8D1C7AB10A0077BBB8 /* Assets.xcassets in Resources */,
+				482D7C8B1C7AB10A0077BBB8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		482D7C941C7AB10A0077BBB8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		482D7C9F1C7AB10A0077BBB8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		482D7C7E1C7AB10A0077BBB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				482D7C881C7AB10A0077BBB8 /* LoginViewController.swift in Sources */,
+				482D7C861C7AB10A0077BBB8 /* AppDelegate.swift in Sources */,
+				482D7CB41C7AB2E60077BBB8 /* Constants.swift in Sources */,
+				482D7CB61C7B76CC0077BBB8 /* MapViewController.swift in Sources */,
+				482D7CBA1C7BD39E0077BBB8 /* LogoutViewController.swift in Sources */,
+				482D7CB81C7B7FAB0077BBB8 /* GCDBlackBox.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		482D7C921C7AB10A0077BBB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				482D7C9B1C7AB10A0077BBB8 /* LoginToUdacityPracticeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		482D7C9D1C7AB10A0077BBB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				482D7CA61C7AB10A0077BBB8 /* LoginToUdacityPracticeUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		482D7C981C7AB10A0077BBB8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 482D7C811C7AB10A0077BBB8 /* LoginToUdacityPractice */;
+			targetProxy = 482D7C971C7AB10A0077BBB8 /* PBXContainerItemProxy */;
+		};
+		482D7CA31C7AB10A0077BBB8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 482D7C811C7AB10A0077BBB8 /* LoginToUdacityPractice */;
+			targetProxy = 482D7CA21C7AB10A0077BBB8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		482D7C891C7AB10A0077BBB8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				482D7C8A1C7AB10A0077BBB8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		482D7C8E1C7AB10A0077BBB8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				482D7C8F1C7AB10A0077BBB8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		482D7CA81C7AB10A0077BBB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		482D7CA91C7AB10A0077BBB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		482D7CAB1C7AB10A0077BBB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LoginToUdacityPractice/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mehdisalemi.LoginToUdacityPractice;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		482D7CAC1C7AB10A0077BBB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LoginToUdacityPractice/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mehdisalemi.LoginToUdacityPractice;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		482D7CAE1C7AB10A0077BBB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LoginToUdacityPracticeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mehdisalemi.LoginToUdacityPracticeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LoginToUdacityPractice.app/LoginToUdacityPractice";
+			};
+			name = Debug;
+		};
+		482D7CAF1C7AB10A0077BBB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LoginToUdacityPracticeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mehdisalemi.LoginToUdacityPracticeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LoginToUdacityPractice.app/LoginToUdacityPractice";
+			};
+			name = Release;
+		};
+		482D7CB11C7AB10A0077BBB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = LoginToUdacityPracticeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mehdisalemi.LoginToUdacityPracticeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = LoginToUdacityPractice;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		482D7CB21C7AB10A0077BBB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = LoginToUdacityPracticeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = mehdisalemi.LoginToUdacityPracticeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = LoginToUdacityPractice;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		482D7C7D1C7AB10A0077BBB8 /* Build configuration list for PBXProject "LoginToUdacityPractice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				482D7CA81C7AB10A0077BBB8 /* Debug */,
+				482D7CA91C7AB10A0077BBB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		482D7CAA1C7AB10A0077BBB8 /* Build configuration list for PBXNativeTarget "LoginToUdacityPractice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				482D7CAB1C7AB10A0077BBB8 /* Debug */,
+				482D7CAC1C7AB10A0077BBB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		482D7CAD1C7AB10A0077BBB8 /* Build configuration list for PBXNativeTarget "LoginToUdacityPracticeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				482D7CAE1C7AB10A0077BBB8 /* Debug */,
+				482D7CAF1C7AB10A0077BBB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		482D7CB01C7AB10A0077BBB8 /* Build configuration list for PBXNativeTarget "LoginToUdacityPracticeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				482D7CB11C7AB10A0077BBB8 /* Debug */,
+				482D7CB21C7AB10A0077BBB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 482D7C7A1C7AB10A0077BBB8 /* Project object */;
+}

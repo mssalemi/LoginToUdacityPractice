@@ -12,50 +12,57 @@ import MapKit
 
 class MapViewController : UIViewController, MKMapViewDelegate {
     
+    var appDelegate: AppDelegate!
     
+    var locationManager : CLLocationManager!
+    
+    @IBOutlet weak var dropPinView: UIView!
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var dropPinMainButton: UIButton!
+    @IBAction func dropPinMain(sender: UIButton) {
+        dropPinIsActive(true)
+    }
+    
+    // Drop Pin View Elements
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var linkTextField: UITextField!
+    @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var currentLocation: UISwitch!
+    
+    @IBAction func drop(sender: UIButton) {
+        if currentLocation.on{
+            dropPinIsActive(false)
+            let la = locationManager.location?.coordinate.latitude
+            let lo = locationManager.location?.coordinate.longitude
+            let co = CLLocationCoordinate2D(latitude: la!, longitude: lo!)
+            let medURL = linkTextField.text
+            let newPin = MKPointAnnotation()
+            newPin.coordinate = co
+            newPin.title = nameTextField.text
+            newPin.subtitle = medURL
+            self.mapView.addAnnotation(newPin)
+        }
+        dropPinIsActive(false)
+    }
+    
+    @IBAction func cancel(sender: UIButton) {
+        dropPinIsActive(false)
+    }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // The "locations" array is an array of dictionary objects that are similar to the JSON
-        // data that you can download from parse.
-        let locations = hardCodedLocationData()
+        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        // We will create an MKPointAnnotation for each dictionary in "locations". The
-        // point annotations will be stored in this array, and then provided to the map view.
-        var annotations = [MKPointAnnotation]()
+        dropPinMainButton.hidden = false
         
-        // The "locations" array is loaded with the sample data below. We are using the dictionaries
-        // to create map annotations. This would be more stylish if the dictionaries were being
-        // used to create custom structs. Perhaps StudentLocation structs.
+        locationManager = CLLocationManager()
         
-        for dictionary in locations {
-            
-            // Notice that the float values are being used to create CLLocationDegree values.
-            // This is a version of the Double type.
-            let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-            let long = CLLocationDegrees(dictionary["longitude"] as! Double)
-            
-            // The lat and long are used to create a CLLocationCoordinates2D instance.
-            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            
-            let first = dictionary["firstName"] as! String
-            let last = dictionary["lastName"] as! String
-            let mediaURL = dictionary["mediaURL"] as! String
-            
-            // Here we create the annotation and set its coordiate, title, and subtitle properties
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = "\(first) \(last)"
-            annotation.subtitle = mediaURL
-            
-            // Finally we place the annotation in an array of annotations.
-            annotations.append(annotation)
-        }
+        dropPinView.hidden = true
         
-        // When the array is complete, we add the annotations to the map.
-        self.mapView.addAnnotations(annotations)
+        self.addPinsFromApi()
     }
     
     // MKMapKit Functions
@@ -72,7 +79,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
-            pinView!.pinColor = .Red
+            // pinView!.pinColor = .Red
             pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
         }
         else {
@@ -105,54 +112,127 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     
     // Testing : Hardcode Locations
-    func hardCodedLocationData() -> [[String : AnyObject]] {
-        return  [
-            [
-                "createdAt" : "2015-02-24T22:27:14.456Z",
-                "firstName" : "Jessica",
-                "lastName" : "Uelmen",
-                "latitude" : 28.1461248,
-                "longitude" : -82.75676799999999,
-                "mapString" : "Tarpon Springs, FL",
-                "mediaURL" : "www.linkedin.com/in/jessicauelmen/en",
-                "objectId" : "kj18GEaWD8",
-                "uniqueKey" : 872458750,
-                "updatedAt" : "2015-03-09T22:07:09.593Z"
-            ], [
-                "createdAt" : "2015-02-24T22:35:30.639Z",
-                "firstName" : "Gabrielle",
-                "lastName" : "Miller-Messner",
-                "latitude" : 35.1740471,
-                "longitude" : -79.3922539,
-                "mapString" : "Southern Pines, NC",
-                "mediaURL" : "http://www.linkedin.com/pub/gabrielle-miller-messner/11/557/60/en",
-                "objectId" : "8ZEuHF5uX8",
-                "uniqueKey" : 2256298598,
-                "updatedAt" : "2015-03-11T03:23:49.582Z"
-            ], [
-                "createdAt" : "2015-02-24T22:30:54.442Z",
-                "firstName" : "Jason",
-                "lastName" : "Schatz",
-                "latitude" : 37.7617,
-                "longitude" : -122.4216,
-                "mapString" : "18th and Valencia, San Francisco, CA",
-                "mediaURL" : "http://en.wikipedia.org/wiki/Swift_%28programming_language%29",
-                "objectId" : "hiz0vOTmrL",
-                "uniqueKey" : 2362758535,
-                "updatedAt" : "2015-03-10T17:20:31.828Z"
-            ], [
-                "createdAt" : "2015-03-11T02:48:18.321Z",
-                "firstName" : "Jarrod",
-                "lastName" : "Parkes",
-                "latitude" : 34.73037,
-                "longitude" : -86.58611000000001,
-                "mapString" : "Huntsville, Alabama",
-                "mediaURL" : "https://linkedin.com/in/jarrodparkes",
-                "objectId" : "CDHfAy8sdp",
-                "uniqueKey" : 996618664,
-                "updatedAt" : "2015-03-13T03:37:58.389Z"
-            ]
-        ]
+//    func hardCodedLocationData() -> [[String : AnyObject]] {
+//        return  [
+//            [
+//                "createdAt" : "2015-02-24T22:27:14.456Z",
+//                "firstName" : "Jessica",
+//                "lastName" : "Uelmen",
+//                "latitude" : 28.1461248,
+//                "longitude" : -82.75676799999999,
+//                "mapString" : "Tarpon Springs, FL",
+//                "mediaURL" : "www.linkedin.com/in/jessicauelmen/en",
+//                "objectId" : "kj18GEaWD8",
+//                "uniqueKey" : 872458750,
+//                "updatedAt" : "2015-03-09T22:07:09.593Z"
+//            ], [
+//                "createdAt" : "2015-02-24T22:35:30.639Z",
+//                "firstName" : "Gabrielle",
+//                "lastName" : "Miller-Messner",
+//                "latitude" : 35.1740471,
+//                "longitude" : -79.3922539,
+//                "mapString" : "Southern Pines, NC",
+//                "mediaURL" : "http://www.linkedin.com/pub/gabrielle-miller-messner/11/557/60/en",
+//                "objectId" : "8ZEuHF5uX8",
+//                "uniqueKey" : 2256298598,
+//                "updatedAt" : "2015-03-11T03:23:49.582Z"
+//            ], [
+//                "createdAt" : "2015-02-24T22:30:54.442Z",
+//                "firstName" : "Jason",
+//                "lastName" : "Schatz",
+//                "latitude" : 37.7617,
+//                "longitude" : -122.4216,
+//                "mapString" : "18th and Valencia, San Francisco, CA",
+//                "mediaURL" : "http://en.wikipedia.org/wiki/Swift_%28programming_language%29",
+//                "objectId" : "hiz0vOTmrL",
+//                "uniqueKey" : 2362758535,
+//                "updatedAt" : "2015-03-10T17:20:31.828Z"
+//            ], [
+//                "createdAt" : "2015-03-11T02:48:18.321Z",
+//                "firstName" : "Jarrod",
+//                "lastName" : "Parkes",
+//                "latitude" : 34.73037,
+//                "longitude" : -86.58611000000001,
+//                "mapString" : "Huntsville, Alabama",
+//                "mediaURL" : "https://linkedin.com/in/jarrodparkes",
+//                "objectId" : "CDHfAy8sdp",
+//                "uniqueKey" : 996618664,
+//                "updatedAt" : "2015-03-13T03:37:58.389Z"
+//            ]
+//        ]
+//    }
+    
+    // Additional
+    func dropPinIsActive(b : Bool){
+        if b {
+            dropPinView.hidden = false
+            dropPinMainButton.hidden = true
+        } else {
+            dropPinView.hidden = true
+            dropPinMainButton.hidden = false
+        }
+    }
+    
+    // Add Location from API
+    func addPinsFromApi(){
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        
+        let task = self.appDelegate.sharedSession.dataTaskWithRequest(request) { (data, response, error) in
+            
+            guard (error == nil) else{
+                print("Error: Request")
+                return
+            }
+            
+            guard let data = data else{
+                print("Error: No Data Found")
+                return
+            }
+            print("RAW Data")
+            print(data)
+            
+            let parsedResult: AnyObject!
+            do {
+                parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+                print(parsedResult)
+            } catch {
+                print("Error: Parsing JSON data")
+                return
+            }
+            
+            guard let allLocations = parsedResult["results"] as? [[String:AnyObject]] else {
+                print("Error Creating all Locations")
+                return
+            }
+            
+            var locations = [MKPointAnnotation]()
+            for loc in allLocations {
+//                let toAdd : [String:AnyObject] = [
+//                    "createdAt" : loc["createdAt"] as! String,
+//                    "firstName" : loc["firstName"] as! String,
+//                    "lastName" : loc["lastName"] as! String,
+//                    "latitude" : loc["latitude"] as! Double,
+//                    "longitude" : loc["longitude"] as! Double,
+//                    "mapString" : loc["mapString"] as! String,
+//                    "mediaURL" : loc["mediaURL"] as! String,
+//                    "objectId" : loc["objectId"] as! String,
+//                    "uniqueKey" : loc["uniqueKey"] as! String,
+//                    "updatedAt" : loc["updatedAt"] as! String
+//                ]
+                let newPoint = MKPointAnnotation()
+                newPoint.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(loc["latitude"] as! Double), longitude: CLLocationDegrees(loc["longitude"] as! Double))
+                newPoint.title = "\(loc["firstName"] as! String)  \(loc["lastName"] as! String)"
+                newPoint.subtitle = loc["mediaURL"] as? String
+                locations.append(newPoint)
+            }
+            print("Locaitons ")
+            print(locations)
+            self.mapView.addAnnotations(locations)
+        }
+        task.resume()
     }
 
     

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="c1v-gU-bgg">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -98,7 +97,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aEJ-LB-4tr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1171" y="738"/>
+            <point key="canvasLocation" x="1171" y="734"/>
         </scene>
         <!--Maps-->
         <scene sceneID="9xz-fr-JIR">
@@ -112,21 +111,94 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Opm-ut-VhH">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Opm-ut-VhH">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="557"/>
                             </mapView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uGE-o0-M3R">
+                                <rect key="frame" x="20" y="58" width="560" height="276"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Whw-Zd-HP7">
+                                        <rect key="frame" x="22" y="238" width="34" height="30"/>
+                                        <state key="normal" title="Drop"/>
+                                        <connections>
+                                            <action selector="drop:" destination="Ie3-gx-ycm" eventType="touchUpInside" id="sks-zE-gdW"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Link Text Field" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FBI-kf-XO6">
+                                        <rect key="frame" x="63" y="199" width="125" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Link" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAp-vy-QQA">
+                                        <rect key="frame" x="18" y="203" width="32" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name Text Field" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l92-SI-vMK">
+                                        <rect key="frame" x="63" y="154" width="125" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfM-6C-UTz">
+                                        <rect key="frame" x="32" y="125" width="28" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Location Text Field" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ikG-xP-jcC">
+                                        <rect key="frame" x="63" y="116" width="142" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bvK-UZ-efs">
+                                        <rect key="frame" x="15" y="163" width="45" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use Current Location?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bx-Sj-gpX">
+                                        <rect key="frame" x="8" y="80" width="171" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dAv-DD-9fF">
+                                        <rect key="frame" x="187" y="75" width="51" height="31"/>
+                                    </switch>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vgg-gy-vE2">
+                                        <rect key="frame" x="63" y="238" width="48" height="30"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancel:" destination="Ie3-gx-ycm" eventType="touchUpInside" id="cEk-eY-WQR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xnM-0Q-zEm">
+                                <rect key="frame" x="20" y="352" width="161" height="93"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="59" id="IBp-0C-XTc"/>
+                                    <constraint firstAttribute="height" constant="30" id="MQV-aV-xnF"/>
+                                </constraints>
+                                <state key="normal" title="Drop Pin"/>
+                                <connections>
+                                    <action selector="dropPinMain:" destination="Ie3-gx-ycm" eventType="touchUpInside" id="Dba-PH-uo7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Opm-ut-VhH" secondAttribute="trailing" constant="-20" id="9sV-4i-LSS"/>
-                            <constraint firstItem="Opm-ut-VhH" firstAttribute="leading" secondItem="5tJ-8f-fcG" secondAttribute="leadingMargin" constant="-20" id="g27-3W-13v"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="Opm-ut-VhH" secondAttribute="bottom" constant="43" id="mxy-Xx-hdm"/>
-                            <constraint firstItem="Opm-ut-VhH" firstAttribute="top" secondItem="5tJ-8f-fcG" secondAttribute="topMargin" id="prm-sW-PXa"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Maps" id="iCx-0Q-fCD"/>
                     <connections>
+                        <outlet property="currentLocation" destination="dAv-DD-9fF" id="NlY-3L-cyJ"/>
+                        <outlet property="dropPinMainButton" destination="xnM-0Q-zEm" id="ZOy-nL-ok2"/>
+                        <outlet property="dropPinView" destination="uGE-o0-M3R" id="LcM-Sp-ikc"/>
+                        <outlet property="linkTextField" destination="FBI-kf-XO6" id="uRc-XJ-6hH"/>
+                        <outlet property="locationTextField" destination="ikG-xP-jcC" id="VQl-Ox-3Yb"/>
                         <outlet property="mapView" destination="Opm-ut-VhH" id="6dW-F6-DBs"/>
+                        <outlet property="nameTextField" destination="l92-SI-vMK" id="lNw-GD-1vZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esF-1Q-dj0" userLabel="First Responder" sceneMemberID="firstResponder"/>

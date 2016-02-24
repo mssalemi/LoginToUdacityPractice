@@ -35,6 +35,17 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             dropPinIsActive(false)
             let la = locationManager.location?.coordinate.latitude
             let lo = locationManager.location?.coordinate.longitude
+
+            guard let laa = la else{
+                print("la is nil")
+                return
+            }
+            
+            guard let loo = lo else{
+                print("lo is nil")
+                return
+            }
+            
             let co = CLLocationCoordinate2D(latitude: la!, longitude: lo!)
             let medURL = linkTextField.text
             let newPin = MKPointAnnotation()
@@ -43,7 +54,6 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             newPin.subtitle = medURL
             self.mapView.addAnnotation(newPin)
         }
-        dropPinIsActive(false)
     }
     
     @IBAction func cancel(sender: UIButton) {
@@ -234,6 +244,9 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         }
         task.resume()
     }
+    
+    
+    // Post Pin
 
     
 }

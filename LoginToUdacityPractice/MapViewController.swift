@@ -16,6 +16,8 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     var locationManager : CLLocationManager!
     
+    var ownPin : Bool!
+    
     @IBOutlet weak var dropPinView: UIView!
     @IBOutlet weak var mapView: MKMapView!
     
@@ -36,15 +38,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             let la = locationManager.location?.coordinate.latitude
             let lo = locationManager.location?.coordinate.longitude
 
-            guard let laa = la else{
-                print("la is nil")
-                return
-            }
-            
-            guard let loo = lo else{
-                print("lo is nil")
-                return
-            }
+            //TODO: Fix la,lo are nil ?!?
             
             let co = CLLocationCoordinate2D(latitude: la!, longitude: lo!)
             let medURL = linkTextField.text
@@ -53,6 +47,8 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             newPin.title = nameTextField.text
             newPin.subtitle = medURL
             self.mapView.addAnnotation(newPin)
+        } else {
+            postStudent()
         }
     }
     
@@ -63,6 +59,8 @@ class MapViewController : UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ownPin = false
         
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
@@ -88,8 +86,10 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            if ownPin! {
+                pinView?.pinTintColor = UIColor.blueColor()
+            }
             pinView!.canShowCallout = true
-            // pinView!.pinColor = .Red
             pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
         }
         else {
@@ -247,6 +247,46 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     
     // Post Pin
+    //TODO: Should take in [String:Object] to represent student instead of hardcoded values!
+    func postStudent(){
+        
+        
+        //TODO: Change here to take data in instead of Hard Coding
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
+        request.HTTPMethod = "POST"
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"Mehdi\", \"lastName\": \"Salemi\",\"mapString\": \"Half Moon Bay, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.4589, \"longitude\": -122.4539}".dataUsingEncoding(NSUTF8StringEncoding)
 
+        
+        let task = self.appDelegate.sharedSession.dataTaskWithRequest(request) { (data, response, error) in
+            
+            guard (error == nil) else{
+                print("Error: Request")
+                return
+            }
+            
+            guard let data = data else{
+                print("Error: No Data Found")
+                return
+            }
+            print(NSString(data: data, encoding: NSUTF8StringEncoding))
+            
+            print("Post Method Complete")
+            
+            let co = CLLocationCoordinate2D(latitude: 37.4589, longitude: -122.4369)
+            let medURL = "Mehdi's URL"
+            let newPin = MKPointAnnotation()
+            newPin.coordinate = co
+            newPin.title = "Mehdi Salemi"
+            newPin.subtitle = medURL
+            self.ownPin = true
+            self.mapView.addAnnotation(newPin)
+        }
+        task.resume()
+        
+    }
     
 }
+

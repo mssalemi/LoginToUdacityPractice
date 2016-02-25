@@ -60,6 +60,8 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mapView.delegate = self
+        
         ownPin = false
         
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -85,10 +87,8 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
         
         if pinView == nil {
+            print("That pin was nil")
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            if ownPin! {
-                pinView?.pinTintColor = UIColor.blueColor()
-            }
             pinView!.canShowCallout = true
             pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
         }
@@ -96,8 +96,14 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             pinView!.annotation = annotation
         }
         
+        if ownPin! == true{
+            pinView?.pinTintColor = UIColor.blueColor()
+        }
+        
         return pinView
     }
+    
+    
     
     
     // This delegate method is implemented to respond to taps. It opens the system browser

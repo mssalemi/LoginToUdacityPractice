@@ -90,9 +90,6 @@ class LoginViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
 
-    
-    // Mark :
-    
     func completeLogin(success : Bool) {
         if success {
             performUIUpdatesOnMain() {
@@ -112,10 +109,6 @@ class LoginViewController: UIViewController {
         self.passwordTextField.text = ""
         self.loginButton.enabled = true
     }
-    
-    // Drop Pin Elements
-    
-    
 
 }
 

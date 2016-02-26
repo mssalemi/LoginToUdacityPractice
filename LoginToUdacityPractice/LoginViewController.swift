@@ -66,6 +66,11 @@ class LoginViewController: UIViewController {
                 self.completeLogin(false)
                 print("Could not extract session")
                 self.loginButton.enabled = true
+                
+                performUIUpdatesOnMain() {
+                    self.alert()
+                }
+                
                 return
             }
             
@@ -108,6 +113,19 @@ class LoginViewController: UIViewController {
         self.usernameTextField.text = ""
         self.passwordTextField.text = ""
         self.loginButton.enabled = true
+    }
+    
+    func alert (){
+        let controller = UIAlertController()
+        controller.title = "Login Failed"
+        controller.message = "Please enter valid username/password!"
+        
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {
+            action in self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        controller.addAction(okAction)
+        self.presentViewController(controller, animated: true, completion: nil)
     }
 
 }

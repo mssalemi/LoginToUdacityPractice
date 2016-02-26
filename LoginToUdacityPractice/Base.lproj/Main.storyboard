@@ -119,7 +119,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aEJ-LB-4tr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="624.5333333333333" y="694.85333333333335"/>
+            <point key="canvasLocation" x="652" y="824"/>
         </scene>
         <!--Maps-->
         <scene sceneID="9xz-fr-JIR">
@@ -136,8 +136,8 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Opm-ut-VhH">
                                 <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
                             </mapView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uGE-o0-M3R">
-                                <rect key="frame" x="16" y="28" width="280" height="216"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uGE-o0-M3R">
+                                <rect key="frame" x="20" y="72" width="280" height="216"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Whw-Zd-HP7">
                                         <rect key="frame" x="22" y="178" width="34" height="30"/>
@@ -259,25 +259,10 @@
                                     <constraint firstItem="bvK-UZ-efs" firstAttribute="bottom" secondItem="l92-SI-vMK" secondAttribute="bottom" id="yrA-qA-ucO"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xnM-0Q-zEm">
-                                <rect key="frame" x="16" y="481" width="65" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="65" id="7OB-3O-0am"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="DPm-Yn-kVH"/>
-                                    <constraint firstAttribute="height" constant="30" id="MQV-aV-xnF"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="gZm-ef-3Rn"/>
-                                </constraints>
-                                <state key="normal" title="Drop Pin"/>
-                                <connections>
-                                    <action selector="dropPinMain:" destination="Ie3-gx-ycm" eventType="touchUpInside" id="Dba-PH-uo7"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xnM-0Q-zEm" firstAttribute="leading" secondItem="uGE-o0-M3R" secondAttribute="leading" id="423-Iy-Bza"/>
                             <constraint firstItem="Opm-ut-VhH" firstAttribute="top" secondItem="5tJ-8f-fcG" secondAttribute="topMargin" id="9h1-1X-y4O"/>
-                            <constraint firstItem="F7h-Z6-kjH" firstAttribute="top" secondItem="xnM-0Q-zEm" secondAttribute="bottom" constant="8" id="LY9-ix-2AT"/>
                             <constraint firstItem="uGE-o0-M3R" firstAttribute="leading" secondItem="5tJ-8f-fcG" secondAttribute="leadingMargin" id="TEd-zA-TYr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Opm-ut-VhH" secondAttribute="trailing" constant="-20" id="a7U-7n-UcH"/>
                             <constraint firstItem="Opm-ut-VhH" firstAttribute="leading" secondItem="5tJ-8f-fcG" secondAttribute="leadingMargin" constant="-20" id="e0P-eQ-esm"/>
@@ -286,9 +271,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Maps" id="iCx-0Q-fCD"/>
+                    <navigationItem key="navigationItem" id="Sd3-es-YVG"/>
                     <connections>
                         <outlet property="currentLocation" destination="dAv-DD-9fF" id="NlY-3L-cyJ"/>
-                        <outlet property="dropPinMainButton" destination="xnM-0Q-zEm" id="ZOy-nL-ok2"/>
                         <outlet property="dropPinView" destination="uGE-o0-M3R" id="LcM-Sp-ikc"/>
                         <outlet property="linkTextField" destination="FBI-kf-XO6" id="uRc-XJ-6hH"/>
                         <outlet property="locationTextField" destination="ikG-xP-jcC" id="VQl-Ox-3Yb"/>
@@ -298,7 +283,69 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esF-1Q-dj0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="624" y="50"/>
+            <point key="canvasLocation" x="1052" y="188"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LH5-qk-fan">
+            <objects>
+                <navigationController storyboardIdentifier="StudentTableNavigationViewController" id="a5p-o2-Rn8" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BtE-im-YyV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="rXG-m5-AJO" kind="relationship" relationship="rootViewController" id="sst-yL-Smz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HNl-7p-fP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1447" y="188"/>
+        </scene>
+        <!--Student Table View Controller-->
+        <scene sceneID="igE-fB-L4m">
+            <objects>
+                <tableViewController storyboardIdentifier="StudentTableViewController" id="rXG-m5-AJO" customClass="StudentTableViewController" customModule="LoginToUdacityPractice" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="3em-PB-RcJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentCell" id="AyX-Vt-lbO">
+                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AyX-Vt-lbO" id="ZVK-yl-Avh">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="rXG-m5-AJO" id="5ov-jc-3yy"/>
+                            <outlet property="delegate" destination="rXG-m5-AJO" id="Cxz-MQ-fLB"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="3Sn-mt-rOT"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yes-MO-NZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1814" y="188"/>
+        </scene>
+        <!--Maps-->
+        <scene sceneID="7dq-ev-qHe">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="svX-Vi-8qa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="cON-wz-e4m" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Maps" id="Czl-9M-Lkv"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3nI-wT-B74">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Ie3-gx-ycm" kind="relationship" relationship="rootViewController" id="JEl-oU-Y8P"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="659" y="188"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="bW4-nJ-EQN">
@@ -310,7 +357,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Ie3-gx-ycm" kind="relationship" relationship="viewControllers" id="uhn-gz-R1J"/>
+                        <segue destination="cON-wz-e4m" kind="relationship" relationship="viewControllers" id="zrF-Oi-rzV"/>
                         <segue destination="2eK-5u-Y4t" kind="relationship" relationship="viewControllers" id="iJw-Wh-9vy"/>
                     </connections>
                 </tabBarController>

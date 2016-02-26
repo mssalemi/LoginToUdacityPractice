@@ -10,22 +10,28 @@ import Foundation
 import UIKit
 import MapKit
 
-class MapViewController : UIViewController, MKMapViewDelegate {
+class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     var appDelegate: AppDelegate!
     
     var locationManager : CLLocationManager!
     
+    var dropPin : UIBarButtonItem!
+    var tableButton : UIBarButtonItem!
+    
     var ownPin : Bool!
+    
+    @IBAction func tableViewButtonPressed(sender: AnyObject) {
+        performUIUpdatesOnMain() {
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("StudentTableNavigationViewController")
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+    }
+    
     
     // Mark : Main View Elements
     @IBOutlet weak var dropPinView: UIView!
     @IBOutlet weak var mapView: MKMapView!
-    
-    @IBOutlet weak var dropPinMainButton: UIButton!
-    @IBAction func dropPinMain(sender: UIButton) {
-        dropPinIsActive(true)
-    }
     
     // Drop Pin View Elements
     @IBOutlet weak var nameTextField: UITextField!
@@ -33,17 +39,24 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var currentLocation: UISwitch!
     
+    var cL = [0.0,0.0]
+    
     @IBAction func drop(sender: UIButton) {
         dropPinIsActive(false)
         if currentLocation.on{
-            let lat = locationManager.location?.coordinate.latitude
-            let long = locationManager.location?.coordinate.longitude
-            print(lat)
-            print(long)
-            // Currently Not Working!
+            print(cL[0])
+            print(locationManager.location?.coordinate)
+            print(cL[1])
+            // Not Working
         } else {
             postStudent("Half Moon Bay, CA", cords: [37.4589,122.6369])
         }
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        var locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        cL[0] = locValue.latitude
+        cL[1] = locValue.longitude
     }
     
     @IBAction func cancel(sender: UIButton) {
@@ -56,10 +69,25 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         mapView.delegate = self
         ownPin = false
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        dropPinMainButton.hidden = false
-        locationManager = CLLocationManager()
         dropPinView.hidden = true
         self.addPinsFromApi()
+        dropPin = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addPin:")
+        tableButton = UIBarButtonItem(title: "Table", style: .Plain, target: self, action: "tableViewButtonPressed:")
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        locationManager.delegate = self
+    }
+    
+    @IBAction func addPin(sender: AnyObject){
+        self.dropPinIsActive(true)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        navigationItem.rightBarButtonItem = dropPin
+        navigationItem.leftBarButtonItem = tableButton
+        super.viewWillAppear(animated)
     }
     
     // Mark : MKMapKit Functions
@@ -121,11 +149,16 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             
             guard let allLocations = parsedResult["results"] as? [[String:AnyObject]] else {
                 print("Error Creating all Locations")
+                performUIUpdatesOnMain() {
+                    self.alert()
+                }
                 return
             }
             
             var locations = [MKPointAnnotation]()
             for loc in allLocations {
+                let student = StudentInformation(student: loc)
+                self.appDelegate.students.append(student)
                 let newPoint = MKPointAnnotation()
                 newPoint.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(loc["latitude"] as! Double), longitude: CLLocationDegrees(loc["longitude"] as! Double))
                 newPoint.title = "\(loc["firstName"] as! String) \(loc["lastName"] as! String)"
@@ -181,11 +214,29 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     func dropPinIsActive(b : Bool){
         if b {
             dropPinView.hidden = false
-            dropPinMainButton.hidden = true
         } else {
             dropPinView.hidden = true
-            dropPinMainButton.hidden = false
         }
+    }
+    
+    func alert (){
+        let controller = UIAlertController()
+        controller.title = "Login Failed"
+        controller.message = "Please enter valid username/password!"
+        
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {
+            action in self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        controller.addAction(okAction)
+        self.presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    func getCordsFromString(cityName : String) -> [Double] {
+        
+        var coder = CLGeocoder()
+
+        return [0,0]
     }
 }
 

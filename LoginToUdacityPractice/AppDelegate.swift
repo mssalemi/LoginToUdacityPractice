@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var sessionID: String? = nil
     var userID: Int? = nil
     
+    var students : [StudentInformation] = []
+    
     /* Done Added */
     
     var window: UIWindow?

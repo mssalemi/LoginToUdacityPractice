@@ -35,7 +35,9 @@ class LoginViewController: UIViewController {
         let task = self.appDelegate.sharedSession.dataTaskWithRequest(request) { (data, response, error) in
             
             guard (error == nil) else{
-                print("Error: Request")
+                performUIUpdatesOnMain() {
+                    self.alert("Network Error!")
+                }
                 self.completeLogin(false)
                 return
             }
@@ -45,10 +47,6 @@ class LoginViewController: UIViewController {
                 self.completeLogin(false)
                 return
             }
-            print("RAW Data")
-            print(data)
-            
-            // Skip First 5 Characters
             let range = NSMakeRange(5, data.length)
             
             let dataWithOutFirst5 = data.subdataWithRange(range)
@@ -64,11 +62,10 @@ class LoginViewController: UIViewController {
             }
             guard let session = parsedResult["session"] as? [String:AnyObject] else{
                 self.completeLogin(false)
-                print("Could not extract session")
                 self.loginButton.enabled = true
                 
                 performUIUpdatesOnMain() {
-                    self.alert()
+                    self.alert("Please enter valid username/password!")
                 }
                 
                 return
@@ -115,10 +112,10 @@ class LoginViewController: UIViewController {
         self.loginButton.enabled = true
     }
     
-    func alert (){
+    func alert (reason : String){
         let controller = UIAlertController()
         controller.title = "Login Failed"
-        controller.message = "Please enter valid username/password!"
+        controller.message = reason
         
         let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {
             action in self.dismissViewControllerAnimated(true, completion: nil)

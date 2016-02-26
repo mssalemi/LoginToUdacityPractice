@@ -11,7 +11,12 @@ import UIKit
 
 class LogoutViewController : UIViewController {
     
+    @IBOutlet weak var cancelButton: UIButton!
     
+    @IBAction func cancelPressed(sender: UIButton) {
+        self.dismissViewControllerAnimated(true, completion: nil
+        )
+    }
     @IBOutlet weak var logoutButton: UIButton!
     
     @IBAction func logoutPressed(sender: UIButton) {

@@ -17,13 +17,13 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     var locationManager : CLLocationManager!
     
     var dropPin : UIBarButtonItem!
-    var tableButton : UIBarButtonItem!
+    var logoutButton : UIBarButtonItem!
     
     var ownPin : Bool!
     
-    @IBAction func tableViewButtonPressed(sender: AnyObject) {
+    @IBAction func logoutViewButtonPressed(sender: AnyObject) {
         performUIUpdatesOnMain() {
-            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("StudentTableNavigationViewController")
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LogoutViewController")
             self.presentViewController(controller, animated: true, completion: nil)
         }
     }
@@ -72,7 +72,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         dropPinView.hidden = true
         self.addPinsFromApi()
         dropPin = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addPin:")
-        tableButton = UIBarButtonItem(title: "Table", style: .Plain, target: self, action: "tableViewButtonPressed:")
+        logoutButton = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: "logoutViewButtonPressed:")
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
@@ -86,7 +86,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     
     override func viewWillAppear(animated: Bool) {
         navigationItem.rightBarButtonItem = dropPin
-        navigationItem.leftBarButtonItem = tableButton
+        navigationItem.leftBarButtonItem = logoutButton
         super.viewWillAppear(animated)
     }
     
@@ -131,7 +131,9 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         let task = self.appDelegate.sharedSession.dataTaskWithRequest(request) { (data, response, error) in
             
             guard (error == nil) else{
-                print("Error: Request")
+                performUIUpdatesOnMain() {
+                    self.alert("Network Error!")
+                }
                 return
             }
             guard let data = data else{
@@ -237,6 +239,19 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         var coder = CLGeocoder()
 
         return [0,0]
+    }
+    
+    func alert (reason : String){
+        let controller = UIAlertController()
+        controller.title = "Login Failed"
+        controller.message = reason
+        
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {
+            action in self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        controller.addAction(okAction)
+        self.presentViewController(controller, animated: true, completion: nil)
     }
 }
 

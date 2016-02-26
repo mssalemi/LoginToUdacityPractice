@@ -13,8 +13,6 @@ class StudentTableViewController: UITableViewController{
 
     var students : [StudentInformation]!
     
-    var backButton : UIBarButtonItem!
-    
     func updateStudents(){
         let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
         students = applicationDelegate.students
@@ -23,7 +21,6 @@ class StudentTableViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Students"
-        backButton = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "dismiss:")
         updateStudents()
     }
     
@@ -35,7 +32,6 @@ class StudentTableViewController: UITableViewController{
         super.viewWillAppear(animated)
         updateStudents()
         tableView.reloadData()
-        navigationItem.leftBarButtonItem = backButton
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

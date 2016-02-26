@@ -85,7 +85,7 @@
         <!--Logout-->
         <scene sceneID="Prq-eh-0js">
             <objects>
-                <viewController id="2eK-5u-Y4t" customClass="LogoutViewController" customModule="LoginToUdacityPractice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LogoutViewController" id="2eK-5u-Y4t" customClass="LogoutViewController" customModule="LoginToUdacityPractice" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9hA-VX-eue"/>
                         <viewControllerLayoutGuide type="bottom" id="a3t-aS-Hfk"/>
@@ -94,32 +94,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1uQ-ih-yPX">
-                                <rect key="frame" x="136" y="269" width="48" height="30"/>
-                                <state key="normal" title="Logout">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1uQ-ih-yPX">
+                                <rect key="frame" x="107" y="307" width="30" height="30"/>
+                                <state key="normal" title="Yes">
                                     <color key="titleShadowColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="logoutPressed:" destination="2eK-5u-Y4t" eventType="touchUpInside" id="RXz-Wh-KYx"/>
+                                    <action selector="logoutPressed:" destination="2eK-5u-Y4t" eventType="touchUpInside" id="xDT-Ih-p5b"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Az-gu-gsV">
+                                <rect key="frame" x="173" y="307" width="30" height="30"/>
+                                <state key="normal" title="No"/>
+                                <connections>
+                                    <action selector="cancelPressed:" destination="2eK-5u-Y4t" eventType="touchUpInside" id="Vmr-xx-JCH"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Are you sure you want to logout?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0kT-A1-H67">
+                                <rect key="frame" x="35" y="273" width="251" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="1uQ-ih-yPX" firstAttribute="leading" secondItem="ky2-FW-dJH" secondAttribute="leadingMargin" constant="116" id="0pV-6z-Bny"/>
-                            <constraint firstItem="1uQ-ih-yPX" firstAttribute="top" secondItem="9hA-VX-eue" secondAttribute="bottom" constant="249" id="EhI-4x-osL"/>
-                            <constraint firstItem="a3t-aS-Hfk" firstAttribute="top" secondItem="1uQ-ih-yPX" secondAttribute="bottom" constant="220" id="dJR-mC-XEo"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1uQ-ih-yPX" secondAttribute="trailing" constant="116" id="rEn-1V-nMi"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Logout" id="DV1-6z-J5D"/>
                     <connections>
-                        <outlet property="logoutButton" destination="1uQ-ih-yPX" id="Qh3-y8-JoY"/>
+                        <outlet property="cancelButton" destination="1Az-gu-gsV" id="NnN-GH-TuI"/>
+                        <outlet property="logoutButton" destination="1uQ-ih-yPX" id="Zr1-q0-uMT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aEJ-LB-4tr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="652" y="824"/>
+            <point key="canvasLocation" x="1052" y="913"/>
         </scene>
         <!--Maps-->
         <scene sceneID="9xz-fr-JIR">
@@ -285,10 +293,11 @@
             </objects>
             <point key="canvasLocation" x="1052" y="188"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Table-->
         <scene sceneID="LH5-qk-fan">
             <objects>
                 <navigationController storyboardIdentifier="StudentTableNavigationViewController" id="a5p-o2-Rn8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Table" id="AtM-hG-cMa"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BtE-im-YyV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -299,7 +308,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HNl-7p-fP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1447" y="188"/>
+            <point key="canvasLocation" x="659" y="852"/>
         </scene>
         <!--Student Table View Controller-->
         <scene sceneID="igE-fB-L4m">
@@ -333,7 +342,6 @@
         <!--Maps-->
         <scene sceneID="7dq-ev-qHe">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="svX-Vi-8qa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="cON-wz-e4m" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Maps" id="Czl-9M-Lkv"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3nI-wT-B74">
@@ -344,6 +352,7 @@
                         <segue destination="Ie3-gx-ycm" kind="relationship" relationship="rootViewController" id="JEl-oU-Y8P"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="svX-Vi-8qa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="659" y="188"/>
         </scene>
@@ -358,7 +367,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="cON-wz-e4m" kind="relationship" relationship="viewControllers" id="zrF-Oi-rzV"/>
-                        <segue destination="2eK-5u-Y4t" kind="relationship" relationship="viewControllers" id="iJw-Wh-9vy"/>
+                        <segue destination="a5p-o2-Rn8" kind="relationship" relationship="viewControllers" id="P1I-cb-KnR"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHp-z7-wuB" userLabel="First Responder" sceneMemberID="firstResponder"/>

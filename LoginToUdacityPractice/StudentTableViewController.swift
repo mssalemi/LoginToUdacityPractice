@@ -15,7 +15,7 @@ class StudentTableViewController: UITableViewController{
     
     func updateStudents(){
         let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        students = applicationDelegate.students
+        students = applicationDelegate.students.students
     }
     
     override func viewDidLoad() {

@@ -21,6 +21,7 @@
 		482D7CC21C7ECD840077BBB8 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D7CC11C7ECD840077BBB8 /* ParseClient.swift */; };
 		482D7CC41C7F95C10077BBB8 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D7CC31C7F95C10077BBB8 /* StudentInformation.swift */; };
 		482D7CC61C7F9A2D0077BBB8 /* StudentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D7CC51C7F9A2D0077BBB8 /* StudentTableViewController.swift */; };
+		482D7CC81C801ECF0077BBB8 /* Students.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D7CC71C801ECF0077BBB8 /* Students.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		482D7CC11C7ECD840077BBB8 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		482D7CC31C7F95C10077BBB8 /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		482D7CC51C7F9A2D0077BBB8 /* StudentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTableViewController.swift; sourceTree = "<group>"; };
+		482D7CC71C801ECF0077BBB8 /* Students.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Students.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,8 +116,9 @@
 				482D7C851C7AB10A0077BBB8 /* AppDelegate.swift */,
 				482D7CB71C7B7FAB0077BBB8 /* GCDBlackBox.swift */,
 				482D7C871C7AB10A0077BBB8 /* LoginViewController.swift */,
-				482D7CC31C7F95C10077BBB8 /* StudentInformation.swift */,
 				482D7CB91C7BD39E0077BBB8 /* LogoutViewController.swift */,
+				482D7CC71C801ECF0077BBB8 /* Students.swift */,
+				482D7CC31C7F95C10077BBB8 /* StudentInformation.swift */,
 				482D7CB51C7B76CC0077BBB8 /* MapViewController.swift */,
 				482D7CC11C7ECD840077BBB8 /* ParseClient.swift */,
 				482D7CB31C7AB2E60077BBB8 /* Constants.swift */,
@@ -284,6 +287,7 @@
 				482D7CB41C7AB2E60077BBB8 /* Constants.swift in Sources */,
 				482D7CB61C7B76CC0077BBB8 /* MapViewController.swift in Sources */,
 				482D7CBA1C7BD39E0077BBB8 /* LogoutViewController.swift in Sources */,
+				482D7CC81C801ECF0077BBB8 /* Students.swift in Sources */,
 				482D7CB81C7B7FAB0077BBB8 /* GCDBlackBox.swift in Sources */,
 				482D7CC61C7F9A2D0077BBB8 /* StudentTableViewController.swift in Sources */,
 			);

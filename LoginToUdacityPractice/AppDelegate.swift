@@ -16,9 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var sharedSession = NSURLSession.sharedSession()
 
     var sessionID: String? = nil
-    var userID: Int? = nil
     
-    var students : [StudentInformation] = []
+    var students : Students!
     
     /* Done Added */
     

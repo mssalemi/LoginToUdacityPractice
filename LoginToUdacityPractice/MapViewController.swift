@@ -156,11 +156,11 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
                 }
                 return
             }
+
+            self.appDelegate.students = Students(allStudents: allLocations)
             
             var locations = [MKPointAnnotation]()
             for loc in allLocations {
-                let student = StudentInformation(student: loc)
-                self.appDelegate.students.append(student)
                 let newPoint = MKPointAnnotation()
                 newPoint.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(loc["latitude"] as! Double), longitude: CLLocationDegrees(loc["longitude"] as! Double))
                 newPoint.title = "\(loc["firstName"] as! String) \(loc["lastName"] as! String)"

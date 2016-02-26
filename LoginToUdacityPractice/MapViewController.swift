@@ -44,17 +44,14 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     @IBAction func drop(sender: UIButton) {
         dropPinIsActive(false)
         if currentLocation.on{
-            print(cL[0])
-            print(locationManager.location?.coordinate)
-            print(cL[1])
-            // Not Working
+            postStudent(" ", cords: cL)
         } else {
-            postStudent("Half Moon Bay, CA", cords: [37.4589,122.6369])
+            postStudent(locationTextField.text!, cords: [45.4214,75.6919])
         }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        var locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         cL[0] = locValue.latitude
         cL[1] = locValue.longitude
     }
@@ -127,6 +124,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         let request = NSMutableURLRequest(URL: NSURL(string: Constants.Parse.baseURL)!)
         request.addValue(Constants.ParseParameterValues.ApplicationID, forHTTPHeaderField: Constants.ParseParameterKeys.ApplicationID)
         request.addValue(Constants.ParseParameterValues.ApiKey, forHTTPHeaderField: Constants.ParseParameterKeys.ApiKey)
+
         
         let task = self.appDelegate.sharedSession.dataTaskWithRequest(request) { (data, response, error) in
             
@@ -199,14 +197,15 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
             
             print("Post Method Complete")
             
-            let co = CLLocationCoordinate2D(latitude: 37.4589, longitude: -122.4369)
-            let medURL = "Mehdi's URL"
+            let co = CLLocationCoordinate2D(latitude: cords[0], longitude: cords[1])
+            let medURL = self.linkTextField.text
             let newPin = MKPointAnnotation()
             newPin.coordinate = co
-            newPin.title = "Mehdi Salemi"
+            newPin.title = self.nameTextField.text
             newPin.subtitle = medURL
             self.ownPin = true
             self.mapView.addAnnotation(newPin)
+            self.ownPin = false
         }
         task.resume()
         

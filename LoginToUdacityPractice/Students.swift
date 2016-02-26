@@ -18,7 +18,7 @@ class Students: NSObject {
         for student in allStudents {
             students.append(StudentInformation(student: student))
         }
-        students.sortInPlace({$0.createdAt > $1.createdAt})
+        self.students.sortInPlace({$0.createdAt > $1.createdAt})
     }
     
 }

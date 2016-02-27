@@ -18,7 +18,7 @@ class Students: NSObject {
         for student in allStudents {
             students.append(StudentInformation(student: student))
         }
-        let sortedArray = students.sort { $0.createdAt.compare($1.createdAt) == .OrderedDescending }
+        let sortedArray = students.sort { $0.updatedAt.compare($1.updatedAt) == .OrderedDescending }
         students = sortedArray
     }
     

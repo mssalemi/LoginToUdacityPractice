@@ -60,7 +60,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
 
         CLGeocoder().reverseGeocodeLocation(CLCurrentLocation) { (myPlacements, myError) -> Void in
             if myError != nil{
-                print("cannot find your location")
+                alert("Failed Finding Location")
             }
             
             if let myPlacement = myPlacements?.first {

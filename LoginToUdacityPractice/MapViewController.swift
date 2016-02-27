@@ -12,9 +12,9 @@ import MapKit
 
 class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
-    var appDelegate: AppDelegate!
+    let locationManager = CLLocationManager()
     
-    var locationManager : CLLocationManager!
+    var appDelegate: AppDelegate!
     
     var dropPin : UIBarButtonItem!
     var logoutButton : UIBarButtonItem!
@@ -28,7 +28,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         }
     }
     
-    
     // Mark : Main View Elements
     @IBOutlet weak var dropPinView: UIView!
     @IBOutlet weak var mapView: MKMapView!
@@ -40,11 +39,13 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     @IBOutlet weak var currentLocation: UISwitch!
     
     var cL = [0.0,0.0]
+    var CLCurrentLocation : CLLocation!
+    var currentLocationString = ""
     
     @IBAction func drop(sender: UIButton) {
         dropPinIsActive(false)
         if currentLocation.on{
-            postStudent(" ", cords: cL)
+            postStudent(currentLocationString, cords: cL)
         } else {
             postStudent(locationTextField.text!, cords: [45.4214,75.6919])
         }
@@ -54,6 +55,20 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         cL[0] = locValue.latitude
         cL[1] = locValue.longitude
+        
+        self.CLCurrentLocation = locations[locations.count - 1]
+
+        CLGeocoder().reverseGeocodeLocation(CLCurrentLocation) { (myPlacements, myError) -> Void in
+            if myError != nil{
+                print("cannot find your location")
+            }
+            
+            if let myPlacement = myPlacements?.first {
+                let myAddress = " \(myPlacement.locality!) \(myPlacement.country!) \(myPlacement.postalCode!)"
+                self.currentLocationString = myAddress
+            }
+        }
+
     }
     
     @IBAction func cancel(sender: UIButton) {
@@ -70,7 +85,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         self.addPinsFromApi()
         dropPin = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addPin:")
         logoutButton = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: "logoutViewButtonPressed:")
-        locationManager = CLLocationManager()
+
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
@@ -82,6 +97,9 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     }
     
     override func viewWillAppear(animated: Bool) {
+        if !appDelegate.loggedIn {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
         navigationItem.rightBarButtonItem = dropPin
         navigationItem.leftBarButtonItem = logoutButton
         super.viewWillAppear(animated)
@@ -112,10 +130,24 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.sharedApplication()
-            if let toOpen = view.annotation?.subtitle! {
-                app.openURL(NSURL(string: toOpen)!)
+            if verifyUrl((view.annotation?.subtitle)!) {
+                if let toOpen = view.annotation?.subtitle! {
+                    app.openURL(NSURL(string: toOpen)!)
+                } else {
+                    alert("URL doesn't exist!")
+                }
+            }
+
+        }
+    }
+    
+    private func verifyUrl (urlString: String?) -> Bool {
+        if let urlString = urlString {
+            if let url = NSURL(string: urlString) {
+                return UIApplication.sharedApplication().canOpenURL(url)
             }
         }
+        return false
     }
     
     // Add Location from API
@@ -150,11 +182,11 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
             guard let allLocations = parsedResult["results"] as? [[String:AnyObject]] else {
                 print("Error Creating all Locations")
                 performUIUpdatesOnMain() {
-                    self.alert()
+                    self.alert("Could not find Studnets for Map!")
                 }
                 return
             }
-
+        
             self.appDelegate.students = Students(allStudents: allLocations)
             
             var locations = [MKPointAnnotation]()
@@ -168,7 +200,9 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
             self.mapView.addAnnotations(locations)
         }
         task.resume()
+    
     }
+    
     
     
     // Mark : Post Pin
@@ -220,25 +254,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         }
     }
     
-    func alert (){
-        let controller = UIAlertController()
-        controller.title = "Login Failed"
-        controller.message = "Please enter valid username/password!"
-        
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {
-            action in self.dismissViewControllerAnimated(true, completion: nil)
-        }
-        
-        controller.addAction(okAction)
-        self.presentViewController(controller, animated: true, completion: nil)
-    }
-    
-    func getCordsFromString(cityName : String) -> [Double] {
-        
-        var coder = CLGeocoder()
-
-        return [0,0]
-    }
     
     func alert (reason : String){
         let controller = UIAlertController()

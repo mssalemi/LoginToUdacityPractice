@@ -98,6 +98,7 @@ class LoginViewController: UIViewController {
                 self.resetUI()
                 let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController")
                 self.presentViewController(controller, animated: true, completion: nil)
+                self.appDelegate.loggedIn = true
             }
         } else {
             performUIUpdatesOnMain(){

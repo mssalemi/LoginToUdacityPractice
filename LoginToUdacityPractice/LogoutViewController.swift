@@ -11,6 +11,8 @@ import UIKit
 
 class LogoutViewController : UIViewController {
     
+    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBAction func cancelPressed(sender: UIButton) {
@@ -38,6 +40,7 @@ class LogoutViewController : UIViewController {
             }
             let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
             print("Logout Successfull!")
+            self.appDelegate.loggedIn = false
             print(NSString(data: newData, encoding: NSUTF8StringEncoding))
             performUIUpdatesOnMain() {
                 self.dismissViewControllerAnimated(true, completion: nil)

@@ -10,18 +10,12 @@ import Foundation
 import UIKit
 
 class StudentTableViewController: UITableViewController{
-
-    var students : [StudentInformation]!
     
-    func updateStudents(){
-        let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        students = applicationDelegate.students.students
-    }
+    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Students"
-        updateStudents()
     }
     
     @IBAction func dismiss(sender: AnyObject){
@@ -29,13 +23,15 @@ class StudentTableViewController: UITableViewController{
     }
     
     override func viewWillAppear(animated: Bool) {
+        if !appDelegate.loggedIn {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
         super.viewWillAppear(animated)
-        updateStudents()
         tableView.reloadData()
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return students.count
+        return appDelegate.students.students.count
     }
     
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -46,24 +42,35 @@ class StudentTableViewController: UITableViewController{
         
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("StudentCell")!
         
-        let student = students[indexPath.row]
+        let student = appDelegate.students.students[indexPath.row]
         cell.textLabel?.text = student.firstName + "-" + student.lastName
         cell.detailTextLabel?.text = student.mediaURL
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) { 
-        if let toOpen = students[indexPath.row].mediaURL {
-            let app = UIApplication.sharedApplication()
-            app.openURL(NSURL(string: toOpen)!)
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if verifyUrl(appDelegate.students.students[indexPath.row].mediaURL) {
+            if let toOpen = appDelegate.students.students[indexPath.row].mediaURL {
+                let app = UIApplication.sharedApplication()
+                app.openURL(NSURL(string: toOpen)!)
+            }
         }
     }
     
+    private func verifyUrl (urlString: String?) -> Bool {
+        if let urlString = urlString {
+            if let url = NSURL(string: urlString) {
+                return UIApplication.sharedApplication().canOpenURL(url)
+            }
+        }
+        return false
+    }
+    
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-        let itemToMove = students[fromIndexPath.row]
-        students.removeAtIndex(fromIndexPath.row)
-        students.insert(itemToMove, atIndex: toIndexPath.row)
+        let itemToMove = appDelegate.students.students[fromIndexPath.row]
+        appDelegate.students.students.removeAtIndex(fromIndexPath.row)
+        appDelegate.students.students.insert(itemToMove, atIndex: toIndexPath.row)
     }
     
     

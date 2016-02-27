@@ -18,7 +18,10 @@ class Students: NSObject {
         for student in allStudents {
             students.append(StudentInformation(student: student))
         }
-        self.students.sortInPlace({$0.createdAt > $1.createdAt})
+        let sortedArray = students.sort { $0.createdAt.compare($1.createdAt) == .OrderedDescending }
+        students = sortedArray
     }
+    
+    
     
 }

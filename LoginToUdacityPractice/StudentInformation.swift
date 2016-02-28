@@ -33,6 +33,8 @@ struct StudentInformation {
         uniqueKey = student["uniqueKey"] as! String
         updatedAt = student["updatedAt"] as! String
     }
+    
+    
 
 }
 

@@ -55,6 +55,10 @@
                                     <action selector="loginPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="txb-2v-lHp"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Qdp-Xw-2Xv">
+                                <rect key="frame" x="142" y="137" width="37" height="37"/>
+                                <color key="color" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -73,6 +77,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activity" destination="Qdp-Xw-2Xv" id="zwc-Uh-1Tb"/>
                         <outlet property="loginButton" destination="rsw-uR-A61" id="H17-PY-uNM"/>
                         <outlet property="passwordTextField" destination="imu-HH-1Nz" id="2sj-fT-aFh"/>
                         <outlet property="usernameTextField" destination="bXL-lZ-cBa" id="lJH-sp-ey7"/>
@@ -224,6 +229,9 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="j2r-gC-jtl">
+                                        <rect key="frame" x="159" y="183" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -281,6 +289,7 @@
                     <tabBarItem key="tabBarItem" title="Maps" id="iCx-0Q-fCD"/>
                     <navigationItem key="navigationItem" id="Sd3-es-YVG"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="j2r-gC-jtl" id="fHG-In-ETT"/>
                         <outlet property="currentLocation" destination="dAv-DD-9fF" id="NlY-3L-cyJ"/>
                         <outlet property="dropPinView" destination="uGE-o0-M3R" id="LcM-Sp-ikc"/>
                         <outlet property="linkTextField" destination="FBI-kf-XO6" id="uRc-XJ-6hH"/>
@@ -323,7 +332,7 @@
                                 <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AyX-Vt-lbO" id="ZVK-yl-Avh">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>

@@ -12,14 +12,19 @@ import MapKit
 
 class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
+    
+    
     let locationManager = CLLocationManager()
     
-    var appDelegate: AppDelegate!
+    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     var dropPin : UIBarButtonItem!
     var logoutButton : UIBarButtonItem!
+    var sync : UIBarButtonItem!
     
     var ownPin : Bool!
+    
+    var parseCleint : ParseCleint!
     
     @IBAction func logoutViewButtonPressed(sender: AnyObject) {
         performUIUpdatesOnMain() {
@@ -43,13 +48,37 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     var currentLocationString = ""
     
     @IBAction func drop(sender: UIButton) {
-        dropPinIsActive(false)
+        
         if currentLocation.on{
+            self.activityIndicator.startAnimating()
+            locationManager.startUpdatingLocation()
             postStudent(currentLocationString, cords: cL)
+            self.mapView.centerCoordinate.latitude = self.cL[0]
+            self.mapView.centerCoordinate.longitude = self.cL[1]
+            self.mapView.setZoomByDelta(0.1, animated: true)
+            locationManager.stopUpdatingLocation()
+            self.activityIndicator.stopAnimating()
         } else {
-            postStudent(locationTextField.text!, cords: [45.4214,75.6919])
+            self.activityIndicator.startAnimating()
+            CLGeocoder().geocodeAddressString(locationTextField.text!, completionHandler:  { (placemark, error) in
+                if (error == nil) {placemark?.first?.location?.coordinate.latitude
+                    self.cL[0] = (placemark?.first?.location?.coordinate.latitude)!
+                    self.cL[1] = (placemark?.first?.location?.coordinate.longitude)!
+                    self.postStudent(self.locationTextField.text!, cords: self.cL)
+                    self.mapView.centerCoordinate.latitude = self.cL[0]
+                    self.mapView.centerCoordinate.longitude = self.cL[1]
+                    self.mapView.setZoomByDelta(0.1, animated: true)
+                    self.locationManager.stopUpdatingLocation()
+                } else {
+                    print("Could not Find Location")
+                }
+            })
+            self.activityIndicator.stopAnimating()
         }
     }
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
@@ -60,7 +89,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
 
         CLGeocoder().reverseGeocodeLocation(CLCurrentLocation) { (myPlacements, myError) -> Void in
             if myError != nil{
-                alert("Failed Finding Location")
+                print("Cannot Find Location")
             }
             
             if let myPlacement = myPlacements?.first {
@@ -80,11 +109,13 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         super.viewDidLoad()
         mapView.delegate = self
         ownPin = false
-        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         dropPinView.hidden = true
-        self.addPinsFromApi()
+        self.parseApi()
+        
         dropPin = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addPin:")
         logoutButton = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: "logoutViewButtonPressed:")
+        sync = UIBarButtonItem(title: "Sync", style: .Plain, target: self, action: "addPins:")
+        
 
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
@@ -96,11 +127,24 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         self.dropPinIsActive(true)
     }
     
+    @IBAction func addPins(sender:AnyObject) {
+        print(parseCleint.students?.students)
+        for student in (parseCleint.students?.students)!{
+            let newPoint = MKPointAnnotation()
+            newPoint.coordinate = CLLocationCoordinate2D(latitude: student.latitude, longitude: student.longitude)
+            newPoint.title = "\(student.firstName) \(student.lastName)"
+            newPoint.subtitle = student.mediaURL
+            self.mapView.addAnnotation(newPoint)
+        }
+        sync.enabled = false
+    }
+    
     override func viewWillAppear(animated: Bool) {
         if !appDelegate.loggedIn {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
-        navigationItem.rightBarButtonItem = dropPin
+        navigationItem.setRightBarButtonItems([dropPin,sync], animated: true)
+        //navigationItem.rightBarButtonItem = dropPin
         navigationItem.leftBarButtonItem = logoutButton
         super.viewWillAppear(animated)
     }
@@ -133,8 +177,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
             if verifyUrl((view.annotation?.subtitle)!) {
                 if let toOpen = view.annotation?.subtitle! {
                     app.openURL(NSURL(string: toOpen)!)
-                } else {
-                    alert("URL doesn't exist!")
                 }
             }
 
@@ -151,56 +193,10 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     }
     
     // Add Location from API
-    func addPinsFromApi(){
+    func parseApi(){
+        parseCleint = ParseCleint()
+        parseCleint.getMethod()
         
-        let request = NSMutableURLRequest(URL: NSURL(string: Constants.Parse.baseURL)!)
-        request.addValue(Constants.ParseParameterValues.ApplicationID, forHTTPHeaderField: Constants.ParseParameterKeys.ApplicationID)
-        request.addValue(Constants.ParseParameterValues.ApiKey, forHTTPHeaderField: Constants.ParseParameterKeys.ApiKey)
-
-        
-        let task = self.appDelegate.sharedSession.dataTaskWithRequest(request) { (data, response, error) in
-            
-            guard (error == nil) else{
-                performUIUpdatesOnMain() {
-                    self.alert("Network Error!")
-                }
-                return
-            }
-            guard let data = data else{
-                print("Error: No Data Found")
-                return
-            }
-            
-            let parsedResult: AnyObject!
-            do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
-            } catch {
-                print("Error: Parsing JSON data")
-                return
-            }
-            
-            guard let allLocations = parsedResult["results"] as? [[String:AnyObject]] else {
-                print("Error Creating all Locations")
-                performUIUpdatesOnMain() {
-                    self.alert("Could not find Studnets for Map!")
-                }
-                return
-            }
-        
-            self.appDelegate.students = Students(allStudents: allLocations)
-            
-            var locations = [MKPointAnnotation]()
-            for loc in allLocations {
-                let newPoint = MKPointAnnotation()
-                newPoint.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(loc["latitude"] as! Double), longitude: CLLocationDegrees(loc["longitude"] as! Double))
-                newPoint.title = "\(loc["firstName"] as! String) \(loc["lastName"] as! String)"
-                newPoint.subtitle = loc["mediaURL"] as? String
-                locations.append(newPoint)
-            }
-            self.mapView.addAnnotations(locations)
-        }
-        task.resume()
-    
     }
     
     
@@ -208,40 +204,8 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     // Mark : Post Pin
     func postStudent(cityName : String, cords : [Double]){
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
-        request.HTTPMethod = "POST"
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"uniqueKey\": \"\(appDelegate.sessionID!)\", \"firstName\": \"\(Constants.ParseParameterValues.userFirstName)\", \"lastName\": \"\(Constants.ParseParameterValues.userLastName)\",\"mapString\": \"\(cityName)\", \"mediaURL\": \"\(linkTextField.text!)\",\"latitude\": \(cords[0]), \"longitude\": \(cords[1])}".dataUsingEncoding(NSUTF8StringEncoding)
-        
-        
-        let task = self.appDelegate.sharedSession.dataTaskWithRequest(request) { (data, response, error) in
-            
-            guard (error == nil) else{
-                print("Error: Request")
-                return
-            }
-            
-            guard let data = data else{
-                print("Error: No Data Found")
-                return
-            }
-            print(NSString(data: data, encoding: NSUTF8StringEncoding))
-            
-            print("Post Method Complete")
-            
-            let co = CLLocationCoordinate2D(latitude: cords[0], longitude: cords[1])
-            let medURL = self.linkTextField.text
-            let newPin = MKPointAnnotation()
-            newPin.coordinate = co
-            newPin.title = self.nameTextField.text
-            newPin.subtitle = medURL
-            self.ownPin = true
-            self.mapView.addAnnotation(newPin)
-            self.ownPin = false
-        }
-        task.resume()
+        parseCleint.postMethod(cityName, mediaURL: linkTextField.text!,lat: cords[0],long: cords[1])
+
         
     }
 
@@ -268,4 +232,22 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         self.presentViewController(controller, animated: true, completion: nil)
     }
 }
+
+extension MKMapView {
+    
+    // delta is the zoom factor
+    // 2 will zoom out x2
+    // .5 will zoom in by x2
+    
+    func setZoomByDelta(delta: Double, animated: Bool) {
+        var _region = region;
+        var _span = region.span;
+        _span.latitudeDelta *= delta;
+        _span.longitudeDelta *= delta;
+        _region.span = _span;
+        
+        setRegion(_region, animated: animated)
+    }
+}
+
 

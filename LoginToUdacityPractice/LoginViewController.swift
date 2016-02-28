@@ -12,6 +12,8 @@ class LoginViewController: UIViewController {
 
     var appDelegate: AppDelegate!
     
+    @IBOutlet weak var activity: UIActivityIndicatorView!
+    
     // Mark : UI Elements
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -19,6 +21,8 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginPressed(sender: UIButton) {
 
+        activity.startAnimating()
+        
         loginButton.enabled = false
         
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
@@ -105,12 +109,14 @@ class LoginViewController: UIViewController {
                 self.resetUI()
             }
         }
+        activity.stopAnimating()
     }
     
     func resetUI() {
         self.usernameTextField.text = ""
         self.passwordTextField.text = ""
         self.loginButton.enabled = true
+        self.activity.stopAnimating()
     }
     
     func alert (reason : String){

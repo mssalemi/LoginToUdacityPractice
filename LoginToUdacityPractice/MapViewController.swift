@@ -48,7 +48,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     var currentLocationString = ""
     
     @IBAction func drop(sender: UIButton) {
-        
+        activityIndicator.startAnimating()
         if currentLocation.on{
             self.activityIndicator.startAnimating()
             locationManager.startUpdatingLocation()
@@ -64,13 +64,13 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
                 if (error == nil) {placemark?.first?.location?.coordinate.latitude
                     self.cL[0] = (placemark?.first?.location?.coordinate.latitude)!
                     self.cL[1] = (placemark?.first?.location?.coordinate.longitude)!
-                    self.postStudent(self.locationTextField.text!, cords: self.cL)
                     self.mapView.centerCoordinate.latitude = self.cL[0]
                     self.mapView.centerCoordinate.longitude = self.cL[1]
                     self.mapView.setZoomByDelta(0.1, animated: true)
+                    self.postStudent(self.locationTextField.text!, cords: self.cL)
                     self.locationManager.stopUpdatingLocation()
                 } else {
-                    print("Could not Find Location")
+                    self.alert("Location Not Found!")
                 }
             })
             self.activityIndicator.stopAnimating()
@@ -111,7 +111,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         ownPin = false
         dropPinView.hidden = true
         self.parseApi()
-        
+
         dropPin = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addPin:")
         logoutButton = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: "logoutViewButtonPressed:")
         sync = UIBarButtonItem(title: "Sync", style: .Plain, target: self, action: "addPins:")
@@ -196,6 +196,9 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     func parseApi(){
         parseCleint = ParseCleint()
         parseCleint.getMethod()
+        if parseCleint.networkComplete == false {
+            alert(parseCleint.getError)
+        }
         
     }
     
@@ -205,8 +208,16 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     func postStudent(cityName : String, cords : [Double]){
         
         parseCleint.postMethod(cityName, mediaURL: linkTextField.text!,lat: cords[0],long: cords[1])
-
         
+        if parseCleint.networkComplete == false {
+            alert("Error Posting the Student")
+        }
+        
+        let newPoint = MKPointAnnotation()
+        newPoint.coordinate = CLLocationCoordinate2D(latitude: cords[0], longitude: cords[1])
+        newPoint.title = nameTextField.text!
+        newPoint.subtitle = linkTextField.text!
+        self.mapView.addAnnotation(newPoint)
     }
 
     
@@ -225,7 +236,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         controller.message = reason
         
         let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {
-            action in self.dismissViewControllerAnimated(true, completion: nil)
+            action in 
         }
         
         controller.addAction(okAction)

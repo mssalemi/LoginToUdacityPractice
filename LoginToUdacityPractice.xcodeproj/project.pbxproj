@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		480F0AA21C83C4860068DDA4 /* LogginClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480F0AA11C83C4860068DDA4 /* LogginClient.swift */; };
 		482D7C861C7AB10A0077BBB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D7C851C7AB10A0077BBB8 /* AppDelegate.swift */; };
 		482D7C881C7AB10A0077BBB8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D7C871C7AB10A0077BBB8 /* LoginViewController.swift */; };
 		482D7C8B1C7AB10A0077BBB8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 482D7C891C7AB10A0077BBB8 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		480F0AA11C83C4860068DDA4 /* LogginClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogginClient.swift; sourceTree = "<group>"; };
 		482D7C821C7AB10A0077BBB8 /* LoginToUdacityPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginToUdacityPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		482D7C851C7AB10A0077BBB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		482D7C871C7AB10A0077BBB8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				482D7CB31C7AB2E60077BBB8 /* Constants.swift */,
 				482D7C891C7AB10A0077BBB8 /* Main.storyboard */,
 				482D7CC11C7ECD840077BBB8 /* ParseClient.swift */,
+				480F0AA11C83C4860068DDA4 /* LogginClient.swift */,
 				482D7C8C1C7AB10A0077BBB8 /* Assets.xcassets */,
 				482D7C8E1C7AB10A0077BBB8 /* LaunchScreen.storyboard */,
 				482D7C911C7AB10A0077BBB8 /* Info.plist */,
@@ -284,6 +287,7 @@
 				482D7C881C7AB10A0077BBB8 /* LoginViewController.swift in Sources */,
 				482D7C861C7AB10A0077BBB8 /* AppDelegate.swift in Sources */,
 				482D7CC21C7ECD840077BBB8 /* ParseClient.swift in Sources */,
+				480F0AA21C83C4860068DDA4 /* LogginClient.swift in Sources */,
 				482D7CB41C7AB2E60077BBB8 /* Constants.swift in Sources */,
 				482D7CB61C7B76CC0077BBB8 /* MapViewController.swift in Sources */,
 				482D7CBA1C7BD39E0077BBB8 /* LogoutViewController.swift in Sources */,

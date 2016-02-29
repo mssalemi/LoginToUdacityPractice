@@ -14,6 +14,8 @@ class ParseCleint : NSObject {
     var students : Students?
     var networkComplete : Bool?
     var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    var postError : String!
+    var getError : String!
     
     override init() {
         print(0)
@@ -34,10 +36,14 @@ class ParseCleint : NSObject {
             print(1)
             guard (error == nil) else{
                 print("Network Error")
+                self.networkComplete = false
+                self.getError = "Network Error"
                 return
             }
             guard let data = data else{
                 print("No Data Found Error")
+                self.networkComplete = false
+                self.getError = "No Data Found Error"
                 return
             }
             print(2)
@@ -47,6 +53,8 @@ class ParseCleint : NSObject {
                 
                 guard let allLocations = parsedResult["results"] as? [[String:AnyObject]] else {
                     print("Error Creating all Locations")
+                    self.getError = "Creating Locations Error"
+                    self.networkComplete = false
                     return
                 }
                 
@@ -60,6 +68,8 @@ class ParseCleint : NSObject {
     
             } catch {
                 print("Error: Parsing JSON data")
+                self.networkComplete = false
+                self.getError = "Parsing Error"
                 return
             }
             
@@ -88,10 +98,14 @@ class ParseCleint : NSObject {
             print(11)
             guard (error == nil) else{
                 print("Network Error")
+                self.networkComplete = false
+                self.postError = "Network Error"
                 return
             }
             guard let data = data else{
                 print("No Data Found Error")
+                self.networkComplete = false
+                self.postError = "Network Error"
                 return
             }
             print(22)

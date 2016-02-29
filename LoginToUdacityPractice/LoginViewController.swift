@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
         
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
             loginButton.enabled = true
-            print("Error: Username or Password is misssing!")
+            alert("Error: Username or Password is misssing!")
         }
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
@@ -81,6 +81,7 @@ class LoginViewController: UIViewController {
             self.completeLogin(true)
         }
         task.resume()
+        
     }
     
     // Mark View Function's

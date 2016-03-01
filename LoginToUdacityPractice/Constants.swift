@@ -17,16 +17,14 @@ struct Constants {
     
     struct Parse {
         static let baseURL = "https://api.parse.com/1/classes/StudentLocation"
-        
+        static let postMethod = "POST"
     }
-    
-    // MARK: TMDB Parameter Keys
+
     struct ParseParameterKeys {
         static let ApiKey = "X-Parse-REST-API-Key"
         static let ApplicationID = "X-Parse-Application-Id"
     }
     
-    // MARK: TMDB Parameter Values
     struct ParseParameterValues {
         static let ApiKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
         static let ApplicationID = " QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"

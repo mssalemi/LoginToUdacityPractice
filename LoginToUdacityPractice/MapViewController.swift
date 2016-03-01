@@ -68,7 +68,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
                     self.mapView.setZoomByDelta(0.1, animated: true)
                     self.locationManager.stopUpdatingLocation()
                 } else {
-                    print("Could not Find Location")
+                    self.alert("Cannot find the location : \(self.locationTextField.text!)")
                 }
             })
             self.activityIndicator.stopAnimating()
@@ -87,7 +87,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         
         CLGeocoder().reverseGeocodeLocation(CLCurrentLocation) { (myPlacements, myError) -> Void in
             if myError != nil{
-                print("Cannot Find Location")
+               self.alert("Cannot Find Location")
             }
             
             if let myPlacement = myPlacements?.first {
@@ -126,7 +126,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     }
     
     @IBAction func addPins(sender:AnyObject) {
-        print(Students.sharedClient().students)
         for student in (Students.sharedClient().students)!{
             let newPoint = MKPointAnnotation()
             newPoint.coordinate = CLLocationCoordinate2D(latitude: student.latitude, longitude: student.longitude)
@@ -142,7 +141,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         navigationItem.setRightBarButtonItems([dropPin,sync], animated: true)
-        //navigationItem.rightBarButtonItem = dropPin
         navigationItem.leftBarButtonItem = logoutButton
         super.viewWillAppear(animated)
     }
@@ -177,7 +175,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
                     app.openURL(NSURL(string: toOpen)!)
                 }
             }
-            
         }
     }
     
@@ -218,14 +215,13 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         }
     }
     
-    
     func alert (reason : String){
         let controller = UIAlertController()
         controller.title = "Login Failed"
         controller.message = reason
         
         let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {
-            action in self.dismissViewControllerAnimated(true, completion: nil)
+            action in
         }
         
         controller.addAction(okAction)
@@ -234,10 +230,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
 }
 
 extension MKMapView {
-    
-    // delta is the zoom factor
-    // 2 will zoom out x2
-    // .5 will zoom in by x2
     
     func setZoomByDelta(delta: Double, animated: Bool) {
         var _region = region;

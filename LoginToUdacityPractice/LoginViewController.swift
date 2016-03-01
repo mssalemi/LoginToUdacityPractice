@@ -54,16 +54,13 @@ class LoginViewController: UIViewController {
                 LogginClient.sharedClient().loggedIn = true
             }
         }
-        
         LogginClient.sharedClient().loginToUdacity(usernameTextField.text!, password: passwordTextField.text!, handler: handler)
-        
     }
     
     // Mark View Function's
     override func viewDidLoad() {
         usernameTextField.text = ""
         passwordTextField.text = ""
-        
         super.viewDidLoad()
     }
 

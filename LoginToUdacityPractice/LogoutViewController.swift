@@ -28,14 +28,13 @@ class LogoutViewController : UIViewController {
                 return
             }
             let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-            print("Logout Successfull!")
+            print("You have been logged out!")
             LogginClient.sharedClient().loggedIn = false
             print(NSString(data: newData, encoding: NSUTF8StringEncoding))
             performUIUpdatesOnMain() {
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
-        
         LogginClient.sharedClient().logoutOfUdacity(handler)
     }
     

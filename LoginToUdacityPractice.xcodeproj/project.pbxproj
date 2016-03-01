@@ -115,21 +115,10 @@
 		482D7C841C7AB10A0077BBB8 /* LoginToUdacityPractice */ = {
 			isa = PBXGroup;
 			children = (
-				482D7C851C7AB10A0077BBB8 /* AppDelegate.swift */,
-				482D7CB71C7B7FAB0077BBB8 /* GCDBlackBox.swift */,
-				482D7C871C7AB10A0077BBB8 /* LoginViewController.swift */,
-				482D7CB91C7BD39E0077BBB8 /* LogoutViewController.swift */,
-				482D7CC71C801ECF0077BBB8 /* Students.swift */,
-				482D7CC31C7F95C10077BBB8 /* StudentInformation.swift */,
-				482D7CB51C7B76CC0077BBB8 /* MapViewController.swift */,
-				482D7CC51C7F9A2D0077BBB8 /* StudentTableViewController.swift */,
-				482D7CB31C7AB2E60077BBB8 /* Constants.swift */,
-				482D7C891C7AB10A0077BBB8 /* Main.storyboard */,
-				482D7CC11C7ECD840077BBB8 /* ParseClient.swift */,
-				480F0AA11C83C4860068DDA4 /* LogginClient.swift */,
-				482D7C8C1C7AB10A0077BBB8 /* Assets.xcassets */,
-				482D7C8E1C7AB10A0077BBB8 /* LaunchScreen.storyboard */,
-				482D7C911C7AB10A0077BBB8 /* Info.plist */,
+				48685D3F1C86470400E61842 /* Other */,
+				48685D3E1C8646CF00E61842 /* Client */,
+				48685D3D1C8646CA00E61842 /* View */,
+				48685D3C1C8646C300E61842 /* Model */,
 			);
 			path = LoginToUdacityPractice;
 			sourceTree = "<group>";
@@ -150,6 +139,49 @@
 				482D7CA71C7AB10A0077BBB8 /* Info.plist */,
 			);
 			path = LoginToUdacityPracticeUITests;
+			sourceTree = "<group>";
+		};
+		48685D3C1C8646C300E61842 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				482D7CC71C801ECF0077BBB8 /* Students.swift */,
+				482D7CC31C7F95C10077BBB8 /* StudentInformation.swift */,
+				482D7CB31C7AB2E60077BBB8 /* Constants.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		48685D3D1C8646CA00E61842 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				482D7C891C7AB10A0077BBB8 /* Main.storyboard */,
+				482D7C871C7AB10A0077BBB8 /* LoginViewController.swift */,
+				482D7CB91C7BD39E0077BBB8 /* LogoutViewController.swift */,
+				482D7CB51C7B76CC0077BBB8 /* MapViewController.swift */,
+				482D7CC51C7F9A2D0077BBB8 /* StudentTableViewController.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		48685D3E1C8646CF00E61842 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				482D7CC11C7ECD840077BBB8 /* ParseClient.swift */,
+				480F0AA11C83C4860068DDA4 /* LogginClient.swift */,
+			);
+			name = Client;
+			sourceTree = "<group>";
+		};
+		48685D3F1C86470400E61842 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				482D7C8E1C7AB10A0077BBB8 /* LaunchScreen.storyboard */,
+				482D7C851C7AB10A0077BBB8 /* AppDelegate.swift */,
+				482D7CB71C7B7FAB0077BBB8 /* GCDBlackBox.swift */,
+				482D7C8C1C7AB10A0077BBB8 /* Assets.xcassets */,
+				482D7C911C7AB10A0077BBB8 /* Info.plist */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

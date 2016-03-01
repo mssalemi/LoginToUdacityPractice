@@ -11,6 +11,10 @@ import UIKit
 
 struct Constants {
     
+    struct Udacity {
+        static let base_url = "https://www.udacity.com/api/session"
+    }
+    
     struct Parse {
         static let baseURL = "https://api.parse.com/1/classes/StudentLocation"
         

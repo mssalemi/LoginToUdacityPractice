@@ -10,19 +10,6 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    /* Mehdi Added */
-    
-    var sharedSession = NSURLSession.sharedSession()
-
-    var sessionID: String? = nil
-    
-    var students : Students!
-    
-    var loginCleint : LogginClient!
-    
-    var loggedIn : Bool!
-    /* Done Added */
     
     var window: UIWindow?
     

@@ -10,12 +10,6 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    
-    
-    var appDelegate: AppDelegate!
-    
-    var loginClient : LogginClient!
-    
     @IBOutlet weak var activity: UIActivityIndicatorView!
     
     // Mark : UI Elements
@@ -33,75 +27,49 @@ class LoginViewController: UIViewController {
             loginButton.enabled = true
             alert("Error: Username or Password is misssing!")
         }
+
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
-        request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"udacity\": {\"username\": \"\(usernameTextField.text!)\", \"password\": \"\(passwordTextField.text!)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
-        
-        let task = self.appDelegate.sharedSession.dataTaskWithRequest(request) { (data, response, error) in
-            
-            guard (error == nil) else{
-                performUIUpdatesOnMain() {
-                    self.alert("Network Error!")
-                }
-                self.completeLogin(false)
-                return
-            }
-            
-            guard let data = data else{
-                print("Error: No Data Found")
-                self.completeLogin(false)
-                return
-            }
-            let range = NSMakeRange(5, data.length)
-            
-            let dataWithOutFirst5 = data.subdataWithRange(range)
-            
-            let parsedResult: AnyObject!
-            do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(dataWithOutFirst5, options: .AllowFragments)
-                print(parsedResult)
-            } catch {
-                print("Error: Parsing JSON data")
-                self.completeLogin(false)
-                return
-            }
-            guard let session = parsedResult["session"] as? [String:AnyObject] else{
-                self.completeLogin(false)
-                self.loginButton.enabled = true
+        func handler(data:NSData?,response:NSURLResponse?, error:NSError?) {
+            dispatch_async(dispatch_get_main_queue()) {
+                let range = NSMakeRange(5, data!.length)
                 
-                performUIUpdatesOnMain() {
+                let dataWithOutFirst5 = data!.subdataWithRange(range)
+                
+                var parsedResult: AnyObject!
+                do {
+                    parsedResult = try NSJSONSerialization.JSONObjectWithData(dataWithOutFirst5, options: .AllowFragments) 
+                } catch {
+                    self.alert("An Error occured when parsing the Data!")
+                }
+                
+                guard let session = parsedResult["session"] as? [String:AnyObject] else{
                     self.alert("Please enter valid username/password!")
+                    return
                 }
                 
-                return
+                LogginClient.sharedClient().currentSessionID = session["id"] as! String
+                
+                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBar")
+                self.presentViewController(controller, animated: true, completion: nil)
+                LogginClient.sharedClient().loggedIn = true
             }
-            
-            self.appDelegate.sessionID = session["id"] as? String
-            print("Authentication Successfull, Session ID is set!")
-            print("Session ID = \(self.appDelegate.sessionID!)")
-            self.completeLogin(true)
         }
-        task.resume()
+        
+        LogginClient.sharedClient().loginToUdacity(usernameTextField.text!, password: passwordTextField.text!, handler: handler)
         
     }
     
     // Mark View Function's
     override func viewDidLoad() {
-        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         usernameTextField.text = ""
         passwordTextField.text = ""
-        
-        loginClient = LogginClient()
-        appDelegate.loginCleint = LogginClient()
         
         super.viewDidLoad()
     }
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        self.resetUI()
     }
 
     func completeLogin(success : Bool) {
@@ -110,7 +78,7 @@ class LoginViewController: UIViewController {
                 self.resetUI()
                 let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController")
                 self.presentViewController(controller, animated: true, completion: nil)
-                self.appDelegate.loggedIn = true
+                LogginClient.sharedClient().loggedIn = true
             }
         } else {
             performUIUpdatesOnMain(){

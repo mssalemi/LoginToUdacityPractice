@@ -11,9 +11,7 @@ import UIKit
 
 class ParseCleint : NSObject {
     
-    var students : Students?
     var networkComplete : Bool?
-    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var postError : String!
     var getError : String!
     
@@ -56,10 +54,8 @@ class ParseCleint : NSObject {
                 }
                 
                 performUIUpdatesOnMain() {
-                    let allStudents = Students(allStudents: allLocations)
-                    self.students = allStudents
-                    self.appDelegate.students = self.students
-                    print(self.students?.students)
+                    Students.sharedClient().addStudents(allLocations)
+                    print(Students.sharedClient().students)
                     self.networkComplete = true
                 }
     
@@ -86,7 +82,7 @@ class ParseCleint : NSObject {
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"uniqueKey\": \"\(appDelegate.sessionID!)\", \"firstName\": \"\(Constants.ParseParameterValues.userFirstName)\", \"lastName\": \"\(Constants.ParseParameterValues.userLastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(lat), \"longitude\": \(long)}".dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = "{\"uniqueKey\": \"\(LogginClient.sharedClient().currentSessionID!)\", \"firstName\": \"\(Constants.ParseParameterValues.userFirstName)\", \"lastName\": \"\(Constants.ParseParameterValues.userLastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(lat), \"longitude\": \(long)}".dataUsingEncoding(NSUTF8StringEncoding)
         
         let session = NSURLSession.sharedSession()
         

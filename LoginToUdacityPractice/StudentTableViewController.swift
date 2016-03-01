@@ -23,7 +23,7 @@ class StudentTableViewController: UITableViewController{
     }
     
     override func viewWillAppear(animated: Bool) {
-        if !appDelegate.loggedIn {
+        if !LogginClient.sharedClient().loggedIn {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         super.viewWillAppear(animated)
@@ -31,7 +31,7 @@ class StudentTableViewController: UITableViewController{
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appDelegate.students.students.count
+        return Students.sharedClient().students.count
     }
     
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -42,7 +42,7 @@ class StudentTableViewController: UITableViewController{
         
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("StudentCell")!
         
-        let student = appDelegate.students.students[indexPath.row]
+        let student = Students.sharedClient().students[indexPath.row]
         cell.textLabel?.text = student.firstName + "-" + student.lastName
         cell.detailTextLabel?.text = student.mediaURL
         
@@ -50,8 +50,8 @@ class StudentTableViewController: UITableViewController{
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if verifyUrl(appDelegate.students.students[indexPath.row].mediaURL) {
-            if let toOpen = appDelegate.students.students[indexPath.row].mediaURL {
+        if verifyUrl(Students.sharedClient().students[indexPath.row].mediaURL) {
+            if let toOpen = Students.sharedClient().students[indexPath.row].mediaURL {
                 let app = UIApplication.sharedApplication()
                 app.openURL(NSURL(string: toOpen)!)
             }
@@ -68,9 +68,9 @@ class StudentTableViewController: UITableViewController{
     }
     
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-        let itemToMove = appDelegate.students.students[fromIndexPath.row]
-        appDelegate.students.students.removeAtIndex(fromIndexPath.row)
-        appDelegate.students.students.insert(itemToMove, atIndex: toIndexPath.row)
+        let itemToMove = Students.sharedClient().students[fromIndexPath.row]
+        Students.sharedClient().students.removeAtIndex(fromIndexPath.row)
+        Students.sharedClient().students.insert(itemToMove, atIndex: toIndexPath.row)
     }
     
     

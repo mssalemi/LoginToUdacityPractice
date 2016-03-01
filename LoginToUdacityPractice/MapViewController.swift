@@ -126,8 +126,8 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     }
     
     @IBAction func addPins(sender:AnyObject) {
-        print(parseCleint.students?.students)
-        for student in (parseCleint.students?.students)!{
+        print(Students.sharedClient().students)
+        for student in (Students.sharedClient().students)!{
             let newPoint = MKPointAnnotation()
             newPoint.coordinate = CLLocationCoordinate2D(latitude: student.latitude, longitude: student.longitude)
             newPoint.title = "\(student.firstName) \(student.lastName)"
@@ -138,7 +138,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     }
     
     override func viewWillAppear(animated: Bool) {
-        if !appDelegate.loggedIn {
+        if !LogginClient.sharedClient().loggedIn {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         navigationItem.setRightBarButtonItems([dropPin,sync], animated: true)
@@ -194,7 +194,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     func parseApi(){
         parseCleint = ParseCleint()
         parseCleint.getMethod()
-        
     }
     
     
@@ -203,8 +202,11 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     func postStudent(cityName : String, cords : [Double]){
         
         parseCleint.postMethod(cityName, mediaURL: linkTextField.text!,lat: cords[0],long: cords[1])
-        
-        
+        var newPin = MKPointAnnotation()
+        newPin.coordinate = CLLocationCoordinate2DMake(cL[0], cL[1])
+        newPin.title = nameTextField.text!
+        newPin.subtitle = linkTextField.text!
+        self.mapView.addAnnotation(newPin)
     }
     
     

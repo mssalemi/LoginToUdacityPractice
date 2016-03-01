@@ -11,9 +11,19 @@ import Foundation
 
 class Students: NSObject {
     
+    private static var sharedInstance = Students()
+    
+    class func sharedClient() -> Students {
+        return sharedInstance
+    }
+    
     var students : [StudentInformation]!
     
-    init(allStudents : [[String:AnyObject]]) {
+    override init(){
+        super.init()
+    }
+    
+    func addStudents(allStudents : [[String:AnyObject]]) {
         students = [StudentInformation]()
         for student in allStudents {
             students.append(StudentInformation(student: student))

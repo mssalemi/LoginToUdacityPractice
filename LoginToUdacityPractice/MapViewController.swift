@@ -12,8 +12,6 @@ import MapKit
 
 class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
-    
-    
     let locationManager = CLLocationManager()
     
     var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -48,7 +46,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     var currentLocationString = ""
     
     @IBAction func drop(sender: UIButton) {
-        activityIndicator.startAnimating()
+        
         if currentLocation.on{
             self.activityIndicator.startAnimating()
             locationManager.startUpdatingLocation()
@@ -64,13 +62,13 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
                 if (error == nil) {placemark?.first?.location?.coordinate.latitude
                     self.cL[0] = (placemark?.first?.location?.coordinate.latitude)!
                     self.cL[1] = (placemark?.first?.location?.coordinate.longitude)!
+                    self.postStudent(self.locationTextField.text!, cords: self.cL)
                     self.mapView.centerCoordinate.latitude = self.cL[0]
                     self.mapView.centerCoordinate.longitude = self.cL[1]
                     self.mapView.setZoomByDelta(0.1, animated: true)
-                    self.postStudent(self.locationTextField.text!, cords: self.cL)
                     self.locationManager.stopUpdatingLocation()
                 } else {
-                    self.alert("Location Not Found!")
+                    print("Could not Find Location")
                 }
             })
             self.activityIndicator.stopAnimating()
@@ -86,7 +84,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         cL[1] = locValue.longitude
         
         self.CLCurrentLocation = locations[locations.count - 1]
-
+        
         CLGeocoder().reverseGeocodeLocation(CLCurrentLocation) { (myPlacements, myError) -> Void in
             if myError != nil{
                 print("Cannot Find Location")
@@ -97,13 +95,13 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
                 self.currentLocationString = myAddress
             }
         }
-
+        
     }
     
     @IBAction func cancel(sender: UIButton) {
         dropPinIsActive(false)
     }
-
+    
     // Mark : View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,12 +109,12 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         ownPin = false
         dropPinView.hidden = true
         self.parseApi()
-
+        
         dropPin = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addPin:")
         logoutButton = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: "logoutViewButtonPressed:")
         sync = UIBarButtonItem(title: "Sync", style: .Plain, target: self, action: "addPins:")
         
-
+        
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
@@ -179,7 +177,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
                     app.openURL(NSURL(string: toOpen)!)
                 }
             }
-
+            
         }
     }
     
@@ -196,9 +194,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     func parseApi(){
         parseCleint = ParseCleint()
         parseCleint.getMethod()
-        if parseCleint.networkComplete == false {
-            alert(parseCleint.getError)
-        }
         
     }
     
@@ -209,17 +204,9 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         
         parseCleint.postMethod(cityName, mediaURL: linkTextField.text!,lat: cords[0],long: cords[1])
         
-        if parseCleint.networkComplete == false {
-            alert("Error Posting the Student")
-        }
         
-        let newPoint = MKPointAnnotation()
-        newPoint.coordinate = CLLocationCoordinate2D(latitude: cords[0], longitude: cords[1])
-        newPoint.title = nameTextField.text!
-        newPoint.subtitle = linkTextField.text!
-        self.mapView.addAnnotation(newPoint)
     }
-
+    
     
     func dropPinIsActive(b : Bool){
         if b {
@@ -236,7 +223,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         controller.message = reason
         
         let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {
-            action in 
+            action in self.dismissViewControllerAnimated(true, completion: nil)
         }
         
         controller.addAction(okAction)
@@ -260,5 +247,3 @@ extension MKMapView {
         setRegion(_region, animated: animated)
     }
 }
-
-

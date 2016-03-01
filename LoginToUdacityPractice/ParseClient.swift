@@ -18,7 +18,6 @@ class ParseCleint : NSObject {
     var getError : String!
     
     override init() {
-        print(0)
         networkComplete = false
         super.init()
     }
@@ -26,14 +25,12 @@ class ParseCleint : NSObject {
     
     func getMethod() {
         let session = NSURLSession.sharedSession()
-        print(5)
         let request = NSMutableURLRequest(URL: NSURL(string: Constants.Parse.baseURL)!)
         request.addValue(Constants.ParseParameterValues.ApplicationID, forHTTPHeaderField: Constants.ParseParameterKeys.ApplicationID)
         request.addValue(Constants.ParseParameterValues.ApiKey, forHTTPHeaderField: Constants.ParseParameterKeys.ApiKey)
         
         let task = session.dataTaskWithRequest(request , completionHandler:  { (data:NSData? , response: NSURLResponse?, error:NSError?) -> Void in
             
-            print(1)
             guard (error == nil) else{
                 print("Network Error")
                 self.networkComplete = false

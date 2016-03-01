@@ -10,7 +10,11 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    
+    
     var appDelegate: AppDelegate!
+    
+    var loginClient : LogginClient!
     
     @IBOutlet weak var activity: UIActivityIndicatorView!
     
@@ -19,7 +23,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
-    @IBAction func loginPressed(sender: UIButton) {
+    @IBAction func loginPressed(sender: UIButton){
 
         activity.startAnimating()
         
@@ -89,7 +93,10 @@ class LoginViewController: UIViewController {
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         usernameTextField.text = ""
         passwordTextField.text = ""
-
+        
+        loginClient = LogginClient()
+        appDelegate.loginCleint = LogginClient()
+        
         super.viewDidLoad()
     }
 

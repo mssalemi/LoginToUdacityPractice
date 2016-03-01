@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var students : Students!
     
+    var loginCleint : LogginClient!
+    
     var loggedIn : Bool!
     /* Done Added */
     

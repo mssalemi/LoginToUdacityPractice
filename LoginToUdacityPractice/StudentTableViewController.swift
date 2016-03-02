@@ -11,11 +11,14 @@ import UIKit
 
 class StudentTableViewController: UITableViewController{
     
-    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    var dropPin : UIBarButtonItem!
+    var logoutButton : UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Students"
+        dropPin = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addStudent:")
+        logoutButton = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: "logoutViewButtonPressed:")
     }
     
     @IBAction func dismiss(sender: AnyObject){
@@ -26,10 +29,26 @@ class StudentTableViewController: UITableViewController{
         if !LogginClient.sharedClient().loggedIn {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
+        navigationItem.rightBarButtonItem = dropPin
+        navigationItem.leftBarButtonItem = logoutButton
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
     
+    @IBAction func logoutViewButtonPressed(sender: AnyObject) {
+        performUIUpdatesOnMain() {
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LogoutViewController")
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func addStudent(sender: AnyObject) {
+        Students.sharedClient().addFromTable = true
+        self.tabBarController?.selectedIndex = 0
+    }
+    
+    
+    //Mark : TableView Functions
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Students.sharedClient().students.count
     }

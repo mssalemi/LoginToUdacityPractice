@@ -42,11 +42,16 @@ class LoginViewController: UIViewController {
                     self.alert("An Error occured when parsing the Data!")
                 }
                 
+                guard let userId = parsedResult["account"] as? [String:AnyObject] else {
+                    print("cant find userID")
+                    return
+                }
+                Students.sharedClient().currentUserId = userId["key"]! as? String
+                
                 guard let session = parsedResult["session"] as? [String:AnyObject] else{
                     self.alert("Please enter valid username/password!")
                     return
                 }
-                
                 LogginClient.sharedClient().currentSessionID = session["id"] as! String
                 
                 let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBar")

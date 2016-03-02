@@ -46,7 +46,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     var currentLocationString = ""
     
     @IBAction func drop(sender: UIButton) {
-        
+        activityIndicator.startAnimating()
         if currentLocation.on{
             self.activityIndicator.startAnimating()
             locationManager.startUpdatingLocation()
@@ -83,7 +83,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         cL[0] = locValue.latitude
         cL[1] = locValue.longitude
         
-        self.CLCurrentLocation = locations[locations.count - 1]
+        CLCurrentLocation = locations[locations.count - 1]
         
         CLGeocoder().reverseGeocodeLocation(CLCurrentLocation) { (myPlacements, myError) -> Void in
             if myError != nil{
@@ -114,11 +114,14 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         logoutButton = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: "logoutViewButtonPressed:")
         sync = UIBarButtonItem(title: "Sync", style: .Plain, target: self, action: "addPins:")
         
+        Students.sharedClient().addFromTable = false
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
+        
+        self.setStudentName()
     }
     
     @IBAction func addPin(sender: AnyObject){
@@ -143,6 +146,10 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         navigationItem.setRightBarButtonItems([dropPin,sync], animated: true)
         navigationItem.leftBarButtonItem = logoutButton
         super.viewWillAppear(animated)
+        if Students.sharedClient().addFromTable == true {
+            dropPinIsActive(true)
+        } 
+        Students.sharedClient().addFromTable = false
     }
     
     // Mark : MKMapKit Functions
@@ -217,7 +224,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     
     func alert (reason : String){
         let controller = UIAlertController()
-        controller.title = "Login Failed"
+        controller.title = "Error! 😌 "
         controller.message = reason
         
         let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {
@@ -227,6 +234,34 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         controller.addAction(okAction)
         self.presentViewController(controller, animated: true, completion: nil)
     }
+    
+    func setStudentName() {
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(Students.sharedClient().currentUserId)")!)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil { // Handle error...
+                return
+            }
+            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
+            print("STUDENT DATA")
+            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            
+            var parsedResult: AnyObject!
+            do {
+                parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
+            } catch {
+                self.alert("An Error occured when parsing the Data!")
+            }
+            guard let userData = parsedResult["user"] as? [String:AnyObject] else {
+                print("cant find userID")
+                return
+            }
+            Students.sharedClient().firstName = "\(userData["first_name"])"
+            Students.sharedClient().lastName = "\(userData["last_name"])"
+        }
+        task.resume() 
+    }
+    
 }
 
 extension MKMapView {

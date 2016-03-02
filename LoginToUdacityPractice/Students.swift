@@ -17,6 +17,12 @@ class Students: NSObject {
         return sharedInstance
     }
     
+    var currentUserId : String!
+    var firstName : String!
+    var lastName : String!
+    
+    var addFromTable : Bool!
+    
     var students : [StudentInformation]!
     
     override init(){

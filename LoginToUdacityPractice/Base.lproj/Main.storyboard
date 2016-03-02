@@ -159,17 +159,8 @@
                                             <action selector="drop:" destination="Ie3-gx-ycm" eventType="touchUpInside" id="sks-zE-gdW"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name Text Field" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l92-SI-vMK">
-                                        <rect key="frame" x="8" y="93" width="264" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="XFx-9R-3RA"/>
-                                            <constraint firstAttribute="width" constant="125" id="nk4-LW-TsS"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Location Text Field" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ikG-xP-jcC">
-                                        <rect key="frame" x="8" y="54" width="264" height="30"/>
+                                        <rect key="frame" x="8" y="47" width="264" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="142" id="yQW-fe-CvV"/>
                                         </constraints>
@@ -177,13 +168,13 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="245" horizontalCompressionResistancePriority="751" misplaced="YES" text="Use Current Location?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bx-Sj-gpX">
-                                        <rect key="frame" x="8" y="20" width="207" height="21"/>
+                                        <rect key="frame" x="8" y="8" width="207" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dAv-DD-9fF">
-                                        <rect key="frame" x="223" y="15" width="51" height="31"/>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dAv-DD-9fF">
+                                        <rect key="frame" x="223" y="8" width="51" height="31"/>
                                     </switch>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="753" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vgg-gy-vE2">
                                         <rect key="frame" x="224" y="178" width="48" height="30"/>
@@ -192,9 +183,6 @@
                                             <action selector="cancel:" destination="Ie3-gx-ycm" eventType="touchUpInside" id="cEk-eY-WQR"/>
                                         </connections>
                                     </button>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="j2r-gC-jtl">
-                                        <rect key="frame" x="130" y="183" width="20" height="20"/>
-                                    </activityIndicatorView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="752" verticalCompressionResistancePriority="751" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Link Text Field" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FBI-kf-XO6">
                                         <rect key="frame" x="8" y="140" width="264" height="30"/>
                                         <constraints>
@@ -203,6 +191,10 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="j2r-gC-jtl">
+                                        <rect key="frame" x="122" y="89" width="37" height="37"/>
+                                        <color key="color" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -211,8 +203,6 @@
                                     <constraint firstAttribute="bottom" secondItem="Vgg-gy-vE2" secondAttribute="bottom" constant="8" id="JnE-wn-Ho6"/>
                                     <constraint firstItem="3bx-Sj-gpX" firstAttribute="top" secondItem="uGE-o0-M3R" secondAttribute="top" constant="20" id="Lnf-6G-vEx"/>
                                     <constraint firstAttribute="bottom" secondItem="Whw-Zd-HP7" secondAttribute="bottom" constant="8" id="NkC-Wf-jPF"/>
-                                    <constraint firstItem="FBI-kf-XO6" firstAttribute="top" secondItem="l92-SI-vMK" secondAttribute="bottom" constant="17" id="Sag-7L-0fK"/>
-                                    <constraint firstItem="l92-SI-vMK" firstAttribute="top" secondItem="ikG-xP-jcC" secondAttribute="bottom" constant="9" id="Syt-oo-sDH"/>
                                     <constraint firstAttribute="trailing" secondItem="dAv-DD-9fF" secondAttribute="trailing" constant="8" id="gRS-7v-0Sa"/>
                                     <constraint firstItem="ikG-xP-jcC" firstAttribute="top" secondItem="dAv-DD-9fF" secondAttribute="bottom" constant="8" id="gV2-KB-2E3"/>
                                     <constraint firstItem="3bx-Sj-gpX" firstAttribute="leading" secondItem="uGE-o0-M3R" secondAttribute="leading" constant="8" id="iR6-Ln-3Fs"/>
@@ -244,7 +234,6 @@
                         <outlet property="linkTextField" destination="FBI-kf-XO6" id="uRc-XJ-6hH"/>
                         <outlet property="locationTextField" destination="ikG-xP-jcC" id="VQl-Ox-3Yb"/>
                         <outlet property="mapView" destination="Opm-ut-VhH" id="6dW-F6-DBs"/>
-                        <outlet property="nameTextField" destination="l92-SI-vMK" id="lNw-GD-1vZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esF-1Q-dj0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -281,7 +270,7 @@
                                 <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AyX-Vt-lbO" id="ZVK-yl-Avh">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>

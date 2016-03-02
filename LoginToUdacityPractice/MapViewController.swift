@@ -36,7 +36,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     @IBOutlet weak var mapView: MKMapView!
     
     // Drop Pin View Elements
-    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var linkTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var currentLocation: UISwitch!
@@ -55,7 +54,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
             self.mapView.centerCoordinate.longitude = self.cL[1]
             self.mapView.setZoomByDelta(0.1, animated: true)
             locationManager.stopUpdatingLocation()
-            self.activityIndicator.stopAnimating()
         } else {
             self.activityIndicator.startAnimating()
             CLGeocoder().geocodeAddressString(locationTextField.text!, completionHandler:  { (placemark, error) in
@@ -71,6 +69,9 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
                     self.alert("Cannot find the location : \(self.locationTextField.text!)")
                 }
             })
+        }
+        let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 1 * Int64(NSEC_PER_SEC))
+        dispatch_after(time, dispatch_get_main_queue()) {
             self.activityIndicator.stopAnimating()
         }
     }
@@ -167,7 +168,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
         if ownPin! == true {
             pinView?.pinTintColor = UIColor.blueColor()
         }
-        let userName = Constants.ParseParameterValues.userFirstName + " " + Constants.ParseParameterValues.userLastName
+        let userName = "\(Students.sharedClient().firstName!) \(Students.sharedClient().lastName!)"
         if (annotation.title! == userName) {
             pinView?.pinTintColor = UIColor.greenColor()
         }
@@ -204,13 +205,17 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     
     // Mark : Post Pin
     func postStudent(cityName : String, cords : [Double]){
-        
         parseCleint.postMethod(cityName, mediaURL: linkTextField.text!,lat: cords[0],long: cords[1])
-        var newPin = MKPointAnnotation()
-        newPin.coordinate = CLLocationCoordinate2DMake(cL[0], cL[1])
-        newPin.title = nameTextField.text!
-        newPin.subtitle = linkTextField.text!
-        self.mapView.addAnnotation(newPin)
+        
+        if parseCleint.networkComplete == true{
+            var newPin = MKPointAnnotation()
+            newPin.coordinate = CLLocationCoordinate2DMake(cL[0], cL[1])
+            newPin.title = "\(Students.sharedClient().firstName!) \(Students.sharedClient().lastName!)"
+            newPin.subtitle = linkTextField.text!
+            self.mapView.addAnnotation(newPin)
+        } else {
+            alert(parseCleint.postError)
+        }
     }
     
     
@@ -236,30 +241,17 @@ class MapViewController : UIViewController, MKMapViewDelegate, CLLocationManager
     }
     
     func setStudentName() {
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(Students.sharedClient().currentUserId)")!)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error...
-                return
-            }
-            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-            print("STUDENT DATA")
-            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
-            
-            var parsedResult: AnyObject!
-            do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
-            } catch {
-                self.alert("An Error occured when parsing the Data!")
-            }
+        
+        func errorHandler(parsedResult:[String:AnyObject]) {
             guard let userData = parsedResult["user"] as? [String:AnyObject] else {
-                print("cant find userID")
+                alert("cant find user name from API?!?!")
                 return
             }
-            Students.sharedClient().firstName = "\(userData["first_name"])"
-            Students.sharedClient().lastName = "\(userData["last_name"])"
+            Students.sharedClient().firstName = userData["first_name"] as! String
+            Students.sharedClient().lastName = userData["last_name"] as! String
         }
-        task.resume() 
+        
+        LogginClient.sharedClient().getStudentLoginName(errorHandler)
     }
     
 }

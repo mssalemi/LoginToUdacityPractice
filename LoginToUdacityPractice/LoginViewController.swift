@@ -10,6 +10,12 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    private static var sharedInstance = LoginViewController()
+    
+    class func sharedClient() -> LoginViewController {
+        return sharedInstance
+    }
+    
     @IBOutlet weak var activity: UIActivityIndicatorView!
     
     // Mark : UI Elements
@@ -27,39 +33,23 @@ class LoginViewController: UIViewController {
             loginButton.enabled = true
             alert("Error: Username or Password is misssing!")
         }
-
         
-        func handler(data:NSData?,response:NSURLResponse?, error:NSError?) {
-            dispatch_async(dispatch_get_main_queue()) {
-                let range = NSMakeRange(5, data!.length)
-                
-                let dataWithOutFirst5 = data!.subdataWithRange(range)
-                
-                var parsedResult: AnyObject!
-                do {
-                    parsedResult = try NSJSONSerialization.JSONObjectWithData(dataWithOutFirst5, options: .AllowFragments) 
-                } catch {
-                    self.alert("An Error occured when parsing the Data!")
-                }
-                
-                guard let userId = parsedResult["account"] as? [String:AnyObject] else {
-                    print("cant find userID")
-                    return
-                }
-                Students.sharedClient().currentUserId = userId["key"]! as? String
-                
-                guard let session = parsedResult["session"] as? [String:AnyObject] else{
-                    self.alert("Please enter valid username/password!")
-                    return
-                }
-                LogginClient.sharedClient().currentSessionID = session["id"] as! String
-                
-                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBar")
-                self.presentViewController(controller, animated: true, completion: nil)
-                LogginClient.sharedClient().loggedIn = true
+        func errorHandler(parsedResult:[String:AnyObject]){
+            
+            guard let session = parsedResult["session"] as? [String:AnyObject] else{
+                self.alert("Please enter valid username/password!")
+                return
             }
+            LogginClient.sharedClient().currentSessionID = session["id"] as! String
+            
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBar")
+            self.presentViewController(controller, animated: true, completion: nil)
+            
+            LogginClient.sharedClient().loggedIn = true
+            print("Loggin Donezo")
         }
-        LogginClient.sharedClient().loginToUdacity(usernameTextField.text!, password: passwordTextField.text!, handler: handler)
+        
+        LogginClient.sharedClient().loginToUdacity(usernameTextField.text!, password: passwordTextField.text!, errorHandler : errorHandler)
     }
     
     // Mark View Function's
@@ -108,6 +98,18 @@ class LoginViewController: UIViewController {
         
         controller.addAction(okAction)
         self.presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    func loginFinished(){
+        print("Login Finished")
+            if LogginClient.sharedClient().loggedIn == true {
+                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBar")
+                self.presentViewController(controller, animated: true, completion: nil)
+            } else {
+                print(LogginClient.sharedClient().currentLoginError)
+                self.alert(LogginClient.sharedClient().currentLoginError)
+                self.resetUI()
+            }
     }
 
 }

@@ -77,7 +77,7 @@ class ParseCleint : NSObject {
         request.addValue(Constants.ParseParameterValues.ApplicationID, forHTTPHeaderField: Constants.ParseParameterKeys.ApplicationID)
         request.addValue(Constants.ParseParameterValues.ApiKey, forHTTPHeaderField: Constants.ParseParameterKeys.ApiKey)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"uniqueKey\": \"\(LogginClient.sharedClient().currentSessionID!)\", \"firstName\": \"\(Students.sharedClient().firstName)\", \"lastName\": \"\(Students.sharedClient().lastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(lat), \"longitude\": \(long)}".dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = "{\"uniqueKey\": \"\(LogginClient.sharedClient().currentSessionID!)\", \"firstName\": \"\(Students.sharedClient().firstName!)\", \"lastName\": \"\(Students.sharedClient().lastName!)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(lat), \"longitude\": \(long)}".dataUsingEncoding(NSUTF8StringEncoding)
         
         let session = NSURLSession.sharedSession()
         

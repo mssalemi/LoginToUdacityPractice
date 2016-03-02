@@ -62,8 +62,8 @@ class StudentTableViewController: UITableViewController{
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("StudentCell")!
         
         let student = Students.sharedClient().students[indexPath.row]
-        cell.textLabel?.text = student.firstName + "-" + student.lastName
-        cell.detailTextLabel?.text = student.mediaURL
+        cell.textLabel?.text = student.firstName! + "-" + student.lastName!
+        cell.detailTextLabel?.text = student.mediaURL!
         
         return cell
     }
